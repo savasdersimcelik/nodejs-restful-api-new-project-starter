@@ -10,12 +10,12 @@ Yeni bir NodeJS API projesi oluşturmak için kullanılabilecek basit bir yapı.
 src -> util -> config.js Dosyası içerisinde bilgileri ( Aşağıda yer alan bilgiler ) kendinize göre düzenleyin
 ```json
 initialAdminAccount: {
-    first_name: "Savaş Dersim",
-    last_name: "Çelik",
-    name: "Savaş Dersim Çelik",
-    email: "admin@example.com",
-    phone: "+905001234567",
-    password: "7BJXH6HjE8",
+    "first_name": "Savaş Dersim",
+    "last_name": "Çelik",
+    "name": "Savaş Dersim Çelik",
+    "email": "admin@example.com",
+    "phone": "+905001234567",
+    "password": "7BJXH6HjE8",
 }
 ```
 
@@ -23,9 +23,9 @@ initialAdminAccount: {
 src -> util -> config.js Dosyası içerisinde
 ```json
 netgsm: {
-    sender: "GÖNDERİCİ ADI",
-    usercode: "USER CODE",
-    password: "NETGSM ŞİFRE"
+    "sender": "GÖNDERİCİ ADI",
+    "usercode": "USER CODE",
+    "password": "NETGSM ŞİFRE"
 }
 ```
 
