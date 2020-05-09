@@ -1,5 +1,7 @@
 # Yeni NodeJS API Projesi
 
+    git clone https://github.com/savasdersimcelik/nodejs-new-project-start.git
+
 Yeni bir NodeJS API projesi oluşturmak için kullanılabilecek basit bir yapı.
 
 # Yapılacaklar
