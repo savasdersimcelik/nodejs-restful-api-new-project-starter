@@ -4,14 +4,21 @@
 
 Yeni bir NodeJS API projesi oluşturmak için kullanılabilecek basit bir yapı.
 
-# Yapılacaklar
-- Doğrulama kodunu SMS olarak gönderme
-- Doğrulama kodunu Eposta olarak gönderme
-- Kodu tekrar gönder sistemi
-- Hesap doğrulama sistemi
-- Şifremi unuttum sistemi
-- Yeni şifre belirleme
-- Kullanıcı giriş sistemi
+# Hedeflenenler
+- [x] Kullanıcı kayıt sistemi
+- [ ] Doğrulama kodunu SMS olarak gönderme
+- [ ] Doğrulama kodunu Eposta olarak gönderme
+- [ ] Kullanıcıya gönderilen smslerin veritabanda saklanması
+- [ ] Kodu tekrar gönder sistemi
+- [ ] Hesap doğrulama sistemi
+- [ ] Şifremi unuttum sistemi
+- [ ] Yeni şifre belirleme
+- [ ] Kullanıcı giriş sistemi
+- [ ] Giriş yapan kullanıcının FCM ID değerini güncelleme
+- [ ] Kullanıcıya Google Firebase FCM üzerinden bildirim gönderme
+- [ ] Kullanıcı profil bilgilerini düzenleme
+- [ ] Kullanıcı profil resmini değiştirme
+
 
 # Kütüphaneler
 - @hapi/joi
