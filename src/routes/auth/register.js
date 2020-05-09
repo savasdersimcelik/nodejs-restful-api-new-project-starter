@@ -1,6 +1,6 @@
 const { joi, joi_error_message } = require('../../util');
 const { user } = require('../../models');
-const { hash_password, generate_random_code, date } = require('../../helpers');
+const { hash_password, generate_random_code, date, netgsm } = require('../../helpers');
 
 /** Yeni kayıt olacak kullanıcılar için post ile gönderilecek data şeması */
 const scheme = joi.object({
@@ -41,7 +41,18 @@ const route = async (req, res) => {
     _save = await _user.save(); // Kullanıcı sisteme kayıt ediliyor.
 
     if (_save) {
-        return res.respond({}, "Kayıt işlemi başarılı bir şekilde gerçekleşti."); // Kayıt işlemi kontrol ediliyor eğer başarılı ise response dönüyor.
+
+        const sms_send = await netgsm.send({
+            user: _save._id,
+            created_by: _save._id,
+            gsmno: _save.phone,
+            type: 'register',
+            code: _save.verification.phone_code
+        });
+
+        if (sms_send) {
+            return res.respond({}, "Kayıt işlemi başarılı bir şekilde gerçekleşti."); // Kayıt işlemi kontrol ediliyor eğer başarılı ise response dönüyor.
+        }
     }
 
     return res.error(500, "Bir hata meydana geldi. Lütfen tekrar deneyin"); // Kayıt işlemi gerçekleşmezse hata mesajı döner.

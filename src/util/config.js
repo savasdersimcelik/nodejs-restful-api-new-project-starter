@@ -1,5 +1,5 @@
 module.exports = {
-    projectName: "Nodejs Yeni Projes",
+    projectName: "Nodejs Yeni Proje",
     mongoConnectionString: "mongodb://localhost:27017/node-new-project-start",
     secretKey: "&JxJf?nGatkj#cXApma8jf3U7evuXwd2",
     pagination: 10,
@@ -12,5 +12,10 @@ module.exports = {
         email: "admin@example.com",
         phone: "+905001234567",
         password: "7BJXH6HjE8",
+    },
+    netgsm: {
+        sender: "GÖNDERİCİ ADI",
+        usercode: "USER CODE",
+        password: "NETGSM ŞİFRE"
     }
 }

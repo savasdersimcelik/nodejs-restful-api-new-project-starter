@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const { config, Debug } = require('../util/index');
 const functions = require('./functions');
 const user = require('./user');
+const sent_sms = require('./sent_sms');
 
 mongoose.connect(config.mongoConnectionString, {
     useCreateIndex: true,
@@ -15,4 +16,5 @@ module.exports = {
     mongoose,
     functions,
     user,
+    sent_sms
 }

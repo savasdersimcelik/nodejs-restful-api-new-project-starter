@@ -4,10 +4,31 @@
 
 Yeni bir NodeJS API projesi oluşturmak için kullanılabilecek basit bir yapı.
 
+# Ayarlar
+
+### Root Admin Bilgileri
+src -> util -> config.js Dosyası içerisinde bilgileri ( Aşağıda yer alan bilgiler ) kendinize göre düzenleyin
+    initialAdminAccount: {
+        first_name: "Savaş Dersim",
+        last_name: "Çelik",
+        name: "Savaş Dersim Çelik",
+        email: "admin@example.com",
+        phone: "+905001234567",
+        password: "7BJXH6HjE8",
+    }
+
+### NetGSM Bilgileri
+src -> util -> config.js Dosyası içerisinde
+    netgsm: {
+        sender: "GÖNDERİCİ ADI",
+        usercode: "USER CODE",
+        password: "NETGSM ŞİFRE"
+    }
+
 # Hedeflenenler
 - [x] Kullanıcı kayıt sistemi
-- [ ] Doğrulama kodunu SMS olarak gönderme
-- [ ] Doğrulama kodunu Eposta olarak gönderme
+- [x] Kayıt sonrası doğrulama kodunu SMS olarak gönderme
+- [ ] Kayıt sonrası doğrulama kodunu Eposta olarak gönderme
 - [ ] Kullanıcıya gönderilen smslerin veritabanda saklanması
 - [ ] Kodu tekrar gönder sistemi
 - [ ] Hesap doğrulama sistemi
