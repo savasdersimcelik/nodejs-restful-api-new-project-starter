@@ -1,3 +1,11 @@
+/**
+ * Herhangi bir route erişim izni gerekiyorsa
+ * Bearer token'dan gelen ID değerini veritabanında sorgular
+ * Eğer veritabanında kullanıcı yoksa requestin gerçekleşmesine izin vermez.
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
 const client = async (req, res, next) => {
     const { auth } = req;
     let _user = {};

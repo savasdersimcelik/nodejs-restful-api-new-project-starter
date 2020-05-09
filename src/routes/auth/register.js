@@ -3,14 +3,16 @@ const { user } = require('../../models');
 const { hash_password, generate_random_code, date, netgsm, mail } = require('../../helpers');
 const { register_mail_template } = require('../../templates');
 
-/** Yeni kayıt olacak kullanıcılar için post ile gönderilecek data şeması */
+/**
+ * Yeni kayıt olacak kullanıcılar için post ile gönderilecek data şeması
+ */
 const scheme = joi.object({
-    first_name: joi.string().required().label('İsim'),
-    last_name: joi.string().required().label('Soyisim'),
-    email: joi.string().email().required().label('Eposta Adresi'),
-    phone: joi.string().length(11).required().label('Telefon Numarası'),
-    password: joi.string().min(6).max(25).required().label('Şifre')
-}).options({ stripUnknown: true }).error(joi_error_message);
+    first_name: joi.string().required().label('İsim'),                      // Kullanıcı adı
+    last_name: joi.string().required().label('Soyisim'),                    // Kullanıcı soyadı
+    email: joi.string().email().required().label('Eposta Adresi'),          // Kullanıcı eposta adresi
+    phone: joi.string().length(11).required().label('Telefon Numarası'),    // Kullanıcı telefon numarası
+    password: joi.string().min(6).max(25).required().label('Şifre')         // Kullanıcı Şifresi
+}).options({ stripUnknown: true }).error(joi_error_message);                // Joi Ayarlar
 
 const route = async (req, res) => {
     let { body, params, query } = req;

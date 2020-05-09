@@ -2,6 +2,9 @@ const axios = require('axios');
 const { sent_sms } = require('../models')
 const { config } = require('../util');
 
+/**
+ * NetGSM Bakiye sorgulama
+ */
 exports.credit_balance = async () => {
     try {
         const response = await axios.get('https://api.netgsm.com.tr/balance/list/get', {
@@ -15,6 +18,9 @@ exports.credit_balance = async () => {
     }
 }
 
+/**
+ * NetGSM SMS bakiyesi sorgulama
+ */
 exports.sms_balance = async () => {
     try {
         const response = await axios.get('https://api.netgsm.com.tr/balance/list/get', {
@@ -29,6 +35,9 @@ exports.sms_balance = async () => {
     }
 }
 
+/**
+ * NetGSM Onaylanmış başlıklar listeler
+ */
 exports.header = async () => {
     try {
         const response = await axios.get('https://api.netgsm.com.tr/sms/header', {
@@ -42,6 +51,9 @@ exports.header = async () => {
     }
 }
 
+/**
+ * 
+ */
 exports.report = async (bulkid) => {
     try {
         const response = await axios.get('https://api.netgsm.com.tr/sms/report', {
@@ -63,6 +75,10 @@ exports.report = async (bulkid) => {
     }
 }
 
+/**
+ * NetGSM Mesaj gönderme
+ * @param {Object} param : Mesaj gönderilirken kullanılacak parametreler
+ */
 exports.send = async (param) => {
     try {
         const response = await axios.get('https://api.netgsm.com.tr/sms/send/get/', {
@@ -94,6 +110,10 @@ exports.send = async (param) => {
     }
 }
 
+/**
+ * 
+ * @param {Object} param: Mesaj içeriği üretilirken kullanılacak parametreler
+ */
 const message_content = async (param) => {
     switch (param.type) {
         case 'register':

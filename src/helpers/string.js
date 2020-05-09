@@ -1,4 +1,8 @@
 
+/**
+ * Gönderilen metinin tamamını küçük ve özel karakterlerden arındırır geri döner
+ * @param {String} str: Slug hale getirilmek istenilen text metin 
+ */
 function string_to_slug(str) {
     var trMap = {
         'α': 'a', 'β': 'b', 'γ': 'g', 'δ': 'd', 'ε': 'e', 'ζ': 'z', 'η': 'h',
@@ -65,6 +69,10 @@ function string_to_slug(str) {
         .toLowerCase();
 }
 
+/**
+ * Türkçe bir kelime ve cümleyi tamamı büyük karakterlere dönüştürüp geri döner
+ * @param {String} str:  Dönüştürülecek metin
+ */
 function tr_upperCase(str) {
     str = str.replace(/^\s+|\s+$/g, '');
     var from = "abcçdefgğhiıjklmnoöprsştuüvyz";
@@ -75,6 +83,11 @@ function tr_upperCase(str) {
     return str;
 }
 
+/**
+ * Belirlenen karakter sayısı kadar rastgele değer üretir
+ * @param {Number} length: Kaç karakterden oluşacak
+ * @param {Boolean} numeric: Numaralar kullanılacak mı? 
+ */
 function generate_random_code(length, numeric = false) {
     var result = '';
     var characters = numeric ? '0123456789' : 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

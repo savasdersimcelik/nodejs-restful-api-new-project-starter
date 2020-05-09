@@ -3,10 +3,19 @@ const { Debug, config } = require('../util');
 const { getTimeAdd, toISOString } = require('./date');
 const { user } = require('../models');
 
+/**
+ * Gönderilen değeri bcrypt kütüphanesi ile şifreler
+ * @param {String} password: Hashlenecek string değer 
+ */
 const hash_password = async (password) => {
     return await bcrypt.hash(password, 10);
 }
 
+/**
+ * Hashlenmiş bir şifre ile String bir değeri eşleştirir
+ * @param {String} password0: Kullanıcıdan gelen şifre
+ * @param {Hash} password1: Veritabanında hashli olarak tutulan şifre
+ */
 const match_password = async (password0, password1) => {
     try {
         const match = await bcrypt.compare(password0, password1);
@@ -17,6 +26,9 @@ const match_password = async (password0, password1) => {
     }
 }
 
+/**
+ * Sistem ilk çalıştırıldığında Root bir yönetici oluşturur
+ */
 const create_initial_admin_account = async () => {
     let { initialAdminAccount } = config;
     const exist = await user.findOne({ type: "admin", email: initialAdminAccount.email });

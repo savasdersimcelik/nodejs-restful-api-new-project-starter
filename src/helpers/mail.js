@@ -14,6 +14,10 @@ const transport = nodemailer.createTransport({
     }
 });
 
+/**
+ * nodemailer kütüphanesi ile mail gönderen metot
+ * @param {Object} param : Mail gönderilirken kullanılacak parametreler
+ */
 exports.send = async (param) => {
     const info = await transport.sendMail({
         from: '"' + config.projectName + '" <' + config.nodemailer.user + '>',
@@ -26,4 +30,8 @@ exports.send = async (param) => {
         return true;
     }
     return false;
+}
+
+const asda = (asdasd = {}) => {
+
 }
