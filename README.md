@@ -12,9 +12,9 @@ Yeni bir NodeJS API projesi oluşturmak için kullanılabilecek basit bir yapı.
 - Kullanıcı giriş sistemi
 
 # Kullanıcı Kayıt
+- URL: http://localhost:3000/api/auth/register
+- Metot: POST
 ```javascript
-URL: http://localhost:3000/api/auth/register
-Metot: POST
 {
 	"first_name": "Savaş Dersim",
 	"last_name": "Çelik",
