@@ -51,21 +51,8 @@ const create_initial_admin_account = async () => {
     Debug("Email: " + initialAdminAccount.email + "\nPassword: " + initialAdminAccount.password);
 }
 
-
-
-function generate_random_code(length, numeric = false) {
-    var result = '';
-    var characters = numeric ? '0123456789' : 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var charactersLength = characters.length;
-    for (var i = 0; i < length; i++) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
-}
-
 module.exports = {
     hash_password,
     match_password,
-    create_initial_admin_account,
-    generate_random_code,
+    create_initial_admin_account
 }

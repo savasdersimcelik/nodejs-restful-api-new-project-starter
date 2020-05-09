@@ -1,7 +1,7 @@
-const { hash_password, match_password, create_initial_admin_account, generate_random_code } = require('./password');
+const { hash_password, match_password, create_initial_admin_account } = require('./password');
 const { encode_token, decode_token } = require('./token');
 const date = require('./date');
-const { string_to_slug, trUpperCase } = require('./string');
+const { string_to_slug, tr_upperCase, generate_random_code } = require('./string');
 
 module.exports = {
     hash_password,
@@ -12,5 +12,5 @@ module.exports = {
     decode_token,
     date,
     string_to_slug,
-    trUpperCase
+    tr_upperCase
 }

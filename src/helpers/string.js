@@ -65,7 +65,7 @@ function string_to_slug(str) {
         .toLowerCase();
 }
 
-function tr_upper_case(str) {
+function tr_upperCase(str) {
     str = str.replace(/^\s+|\s+$/g, '');
     var from = "abcçdefgğhiıjklmnoöprsştuüvyz";
     var to = "ABCÇDEFGĞHİIJKLMNOÖPRSŞTUÜVYZ";
@@ -75,7 +75,18 @@ function tr_upper_case(str) {
     return str;
 }
 
+function generate_random_code(length, numeric = false) {
+    var result = '';
+    var characters = numeric ? '0123456789' : 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
+
 module.exports = {
     string_to_slug,
-    tr_upper_case
+    tr_upperCase,
+    generate_random_code
 }
