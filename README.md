@@ -64,8 +64,7 @@ nodemailer: {
     "user": "info@example.com",
     "password": "MAİL ŞİFRESİ",
     "rejectUnauthorized": false,      
-    "logo": "uploads/mail_logo.png",
-    "templates_dir": Path.resolve(__dirname, "../", "templates")
+    "logo": "uploads/mail_logo.png"
 }
 ```
 
