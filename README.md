@@ -112,6 +112,6 @@ Eposta adresi veya telefon numarası kullanılarak giriş yapılabilir.
 {
     "email": "savasdersimcelik@gmail.com",
     "phone": "05078614659",
-	"password": "Savas-909"
+	"password": "123456"
 }
 ```
