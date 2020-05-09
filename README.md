@@ -8,7 +8,7 @@ Yeni bir NodeJS API projesi oluşturmak için kullanılabilecek basit bir yapı.
 ### Hedeflenenler
 - [x] Kullanıcı kayıt sistemi
 - [x] Kayıt sonrası doğrulama kodunu SMS olarak gönderme
-- [ ] Kayıt sonrası doğrulama kodunu Eposta olarak gönderme
+- [x] Kayıt sonrası doğrulama kodunu Eposta olarak gönderme
 - [ ] Kullanıcıya gönderilen smslerin veritabanda saklanması
 - [ ] Kodu tekrar gönder sistemi
 - [ ] Hesap doğrulama sistemi
@@ -35,6 +35,16 @@ initialAdminAccount: {
 }
 ```
 
+### Doğrulama Sistemleri
+src -> util -> config.js Doğrulama sistemileri ile ilgili ayarlarınızı yapabilirsiniz.
+```json
+verification: {
+    "expiration_time": 900,
+    "phone": false,
+    "email": false
+}
+```
+
 ### NetGSM Bilgileri
 src -> util -> config.js Dosyası içerisinde netgsm bilgilerini kendinize göre değiştirin.
 ```json
@@ -45,13 +55,17 @@ netgsm: {
 }
 ```
 
-### Doğrulama Sistemleri
-src -> util -> config.js Doğrulama sistemileri ile ilgili ayarlarınızı yapabilirsiniz.
+### SMTP Bilgileri
+src -> util -> config.js Dosyası içerisinde netgsm bilgilerini kendinize göre değiştirin.
 ```json
-verification: {
-    "expiration_time": 900,
-    "sms": true,
-    "email": true
+nodemailer: {
+    "host": "mail.example.com",
+    "port": 587,
+    "user": "info@example.com",
+    "password": "MAİL ŞİFRESİ",
+    "rejectUnauthorized": false,      
+    "logo": "uploads/mail_logo.png",
+    "templates_dir": Path.resolve(__dirname, "../", "templates")
 }
 ```
 
