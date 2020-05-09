@@ -91,7 +91,8 @@ nodemailer: {
         └── app.js
     └── index.js
 
-# Kullanıcı Kayıt
+### API Sorgu ve Parametreler
+### Kullanıcı Kayıt
 - URL: http://localhost:3000/api/auth/register
 - Metot: POST
 ```json
@@ -104,7 +105,7 @@ nodemailer: {
 }
 ```
 
-# Kullanıcı Giriş
+### Kullanıcı Giriş
 Eposta adresi veya telefon numarası kullanılarak giriş yapılabilir.
 - URL: http://localhost:3000/api/auth/login
 - Metot: POST
