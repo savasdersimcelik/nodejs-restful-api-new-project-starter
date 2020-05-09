@@ -7,7 +7,7 @@ Yeni bir NodeJS API projesi oluşturmak için kullanılabilecek basit bir yapı.
 # Ayarlar
 
 ### Root Admin Bilgileri
-src -> util -> config.js Dosyası içerisinde bilgileri ( Aşağıda yer alan bilgiler ) kendinize göre düzenleyin
+src -> util -> config.js Dosyası içerisinde bilgileri ( Aşağıda yer alan bilgiler ) kendinize göre değiştirin.
 ```json
 initialAdminAccount: {
     "first_name": "Savaş Dersim",
@@ -20,7 +20,7 @@ initialAdminAccount: {
 ```
 
 ### NetGSM Bilgileri
-src -> util -> config.js Dosyası içerisinde
+src -> util -> config.js Dosyası içerisinde netgsm bilgilerini kendinize göre değiştirin.
 ```json
 netgsm: {
     "sender": "GÖNDERİCİ ADI",
