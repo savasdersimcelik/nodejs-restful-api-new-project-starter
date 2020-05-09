@@ -16,11 +16,12 @@ Yeni bir NodeJS API projesi oluşturmak için kullanılabilecek basit bir yapı.
 # Kullanıcı Kayıt
 - URL: http://localhost:3000/api/auth/register
 - Metot: POST
-
-    {
-        "first_name": "Savaş Dersim",
-        "last_name": "Çelik",
-        "email": "savasdersimcelik@gmail.com",
-        "phone": "05078614659",
-        "password": "Savas-909"
-    }
+```json
+{
+	"first_name": "Savaş Dersim",
+	"last_name": "Çelik",
+	"email": "savasdersimcelik@gmail.com",
+	"phone": "05078614659",
+	"password": "Savas-909"
+}
+```
