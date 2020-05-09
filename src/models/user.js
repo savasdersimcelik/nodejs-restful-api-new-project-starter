@@ -24,7 +24,7 @@ const user_schema = new Schema({
     },
     type: { type: Schema.Types.String, enum: ["admin", "user"], default: "user" },
     fcm_token: { type: Schema.Types.String, default: "" },
-    is_active: { type: Schema.Types.Boolean, default: true },
+    is_active: { type: Schema.Types.Boolean, default: false },
     is_delete: { type: Schema.Types.Boolean, default: false },
     created_at: { type: Schema.Types.Date, default: Date.now },
     updated_at: { type: Schema.Types.Date },

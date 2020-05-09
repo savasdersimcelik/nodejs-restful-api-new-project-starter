@@ -29,6 +29,16 @@ netgsm: {
 }
 ```
 
+### Doğrulama Sistemleri
+src -> util -> config.js Doğrulama sistemileri ile ilgili ayarlarınızı yapabilirsiniz.
+```json
+verification: {
+    "expiration_time": 900,
+    "sms": true,
+    "email": true
+}
+```
+
 # Hedeflenenler
 - [x] Kullanıcı kayıt sistemi
 - [x] Kayıt sonrası doğrulama kodunu SMS olarak gönderme
