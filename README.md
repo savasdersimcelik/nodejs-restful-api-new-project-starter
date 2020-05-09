@@ -1,2 +1,15 @@
-# Nodejs-New-Project-Start
-A simple project structure to create an API for a new project with Nodejs
+# Yeni NodeJS API Projesi Oluşturmak İçin Basit Bir İskelete
+
+
+
+
+
+
+# Yapılacaklar
+- Doğrulama kodunu SMS olarak gönderme
+- Doğrulama kodunu Eposta olarak gönderme
+- Kodu tekrar gönder sistemi
+- Hesap doğrulama sistemi
+- Şifremi unuttum sistemi
+- Yeni şifre belirleme
+- Kullanıcı giriş sistemi
