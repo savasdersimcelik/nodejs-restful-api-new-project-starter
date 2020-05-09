@@ -9,7 +9,7 @@ Yeni bir NodeJS API projesi oluşturmak için kullanılabilecek basit bir yapı.
 - [x] Kullanıcı kayıt sistemi
 - [x] Kayıt sonrası doğrulama kodunu SMS olarak gönderme
 - [x] Kayıt sonrası doğrulama kodunu Eposta olarak gönderme
-- [ ] Kullanıcıya gönderilen smslerin veritabanda saklanması
+- [x] Kullanıcıya gönderilen smslerin veritabanda saklanması
 - [ ] Kodu tekrar gönder sistemi
 - [ ] Hesap doğrulama sistemi
 - [ ] Şifremi unuttum sistemi
