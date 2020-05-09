@@ -15,6 +15,11 @@ module.exports = {
         phone: "05001234567",           // Root yönetici telefon numarası
         password: "7BJXH6HjE8",         // Root Yönetici Şifresi
     },
+    verification: {
+        expiration_time: 900,           // Doğrulama kodu son kullanım süresi saniye cinsinden
+        phone: false,                   // SMS doğrulama sistemi aktif mi pasif mi ?
+        email: false                    // Email doğrulama sistemi aktif mi pasif mi ?
+    },
     netgsm: {
         sender: "GÖNDERİCİ ADI",            // Netgsm Gönderici Adı
         usercode: "USER CODE",              // Netgsm Kullanıcı Giriş Bilgisi
@@ -28,11 +33,6 @@ module.exports = {
         rejectUnauthorized: false,      
         logo: "uploads/mail_logo.png",      // Mail içerisindeki logo
         templates_dir: Path.resolve(__dirname, "../", "templates")  // Mail temalarının bulunduğu klasör
-    },
-    verification: {
-        expiration_time: 900,       // Doğrulama kodu son kullanım süresi saniye cinsinden
-        phone: false,               // SMS doğrulama sistemi aktif mi pasif mi ?
-        email: false                // Email doğrulama sistemi aktif mi pasif mi ?
     },
     uploads: {
         folder: "uploads/",                                             // Upload klasörünün adı

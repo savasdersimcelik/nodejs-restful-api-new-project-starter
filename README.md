@@ -69,16 +69,16 @@ nodemailer: {
 ```
 
 # Kütüphaneler
-- @hapi/joi
-- axios
-- bcrypt
-- body-parser
-- cors
-- express
-- joi-objectid
-- jsonwebtoken
-- lodash
-- mongoose
+- [@hapi/joi](https://www.npmjs.com/package/@hapi/joi)
+- [axios](https://www.npmjs.com/package/axios)
+- [bcrypt](https://www.npmjs.com/package/bcrypt)
+- [body-parser](https://www.npmjs.com/package/body-parser)
+- [cors](https://www.npmjs.com/package/cors)
+- [express](https://www.npmjs.com/package/express)
+- [joi-objectid](https://www.npmjs.com/package/joi-objectid)
+- [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
+- [lodash](https://www.npmjs.com/package/lodash)
+- [mongoose](https://www.npmjs.com/package/mongoose)
 
 # Klasör Yapısı
 
@@ -89,6 +89,7 @@ nodemailer: {
         ├── routes                      # API Sorgularının işlendiği klasör
         ├── util                        # Diğer fonksiyonların yer aldığı klasör
         └── app.js
+    └── index.js
 
 # Kullanıcı Kayıt
 - URL: http://localhost:3000/api/auth/register
