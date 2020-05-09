@@ -10,11 +10,11 @@ Yeni bir NodeJS API projesi oluşturmak için kullanılabilecek basit bir yapı.
 - [x] Kayıt sonrası doğrulama kodunu SMS olarak gönderme
 - [x] Kayıt sonrası doğrulama kodunu Eposta olarak gönderme
 - [x] Kullanıcıya gönderilen smslerin veritabanda saklanması
-- [ ] Kodu tekrar gönder sistemi
+- [ ] Doğrulama kodunu tekrar gönder sistemi
 - [ ] Hesap doğrulama sistemi
 - [ ] Şifremi unuttum sistemi
 - [ ] Yeni şifre belirleme
-- [ ] Kullanıcı giriş sistemi
+- [x] Kullanıcı giriş sistemi ( Telefon veya Eposta Adresi )
 - [ ] Giriş yapan kullanıcının FCM ID değerini güncelleme
 - [ ] Kullanıcıya Google Firebase FCM üzerinden bildirim gönderme
 - [ ] Kullanıcı profil bilgilerini düzenleme
@@ -100,6 +100,18 @@ nodemailer: {
 	"last_name": "Çelik",
 	"email": "savasdersimcelik@gmail.com",
 	"phone": "05078614659",
+	"password": "Savas-909"
+}
+```
+
+# Kullanıcı Giriş
+Eposta adresi veya telefon numarası kullanılarak giriş yapılabilir.
+- URL: http://localhost:3000/api/auth/login
+- Metot: POST
+```json
+{
+    "email": "savasdersimcelik@gmail.com",
+    //"phone": "05078614659",
 	"password": "Savas-909"
 }
 ```

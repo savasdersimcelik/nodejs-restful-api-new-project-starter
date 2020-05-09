@@ -21,17 +21,17 @@ module.exports = {
         email: false                    // Email doğrulama sistemi aktif mi pasif mi ?
     },
     netgsm: {
-        sender: "GÖNDERİCİ ADI",            // Netgsm Gönderici Adı
-        usercode: "USER CODE",              // Netgsm Kullanıcı Giriş Bilgisi
-        password: "NETGSM ŞİFRE"            // Netgsm Şifre
+        sender: "GÖNDERİCİ ADI",        // Netgsm Gönderici Adı
+        usercode: "USER CODE",          // Netgsm Kullanıcı Giriş Bilgisi
+        password: "NETGSM ŞİFRE"        // Netgsm Şifre
     },
     nodemailer: {
-        host: "mail.example.com",           // Mail server host name
-        port: 587,                          // Mail server port adresi
-        user: "info@example.com",           // Mail gönderilecek eposta adresi
-        password: "MAİL ŞİFRESİ",           // Mail gönderilecek eposta adresi şifresi
+        host: "mail.example.com",       // Mail server host name
+        port: 587,                      // Mail server port adresi
+        user: "info@example.com",       // Mail gönderilecek eposta adresi
+        password: "MAİL ŞİFRESİ",       // Mail gönderilecek eposta adresi şifresi
         rejectUnauthorized: false,      
-        logo: "uploads/mail_logo.png",      // Mail içerisindeki logo
+        logo: "uploads/mail_logo.png",  // Mail içerisindeki logo
         templates_dir: Path.resolve(__dirname, "../", "templates")  // Mail temalarının bulunduğu klasör
     },
     uploads: {
