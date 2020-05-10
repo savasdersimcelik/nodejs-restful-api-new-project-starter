@@ -79,6 +79,7 @@ nodemailer: {
 - [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
 - [lodash](https://www.npmjs.com/package/lodash)
 - [mongoose](https://www.npmjs.com/package/mongoose)
+- [nodemailer](https://www.npmjs.com/package/nodemailer)
 
 # Klasör Yapısı
 
