@@ -1,5 +1,5 @@
 const { user } = require('../../models');
-const { joi, joi_error_message } = require('../../util');
+const { joi, joi_error_message, config } = require('../../util');
 const { match_password, encode_token } = require('../../helpers');
 const _ = require('lodash');
 
@@ -21,9 +21,18 @@ const route = async (req, res) => {
         return res.error(400, "Lütfen giriş bilgilerinizi kontrol edin."); // Kullanıcı yoksa hata mesaj döner
     }
 
-    /** Kullanıcı hesabı doğrulanmış mı kontrol eder. */
-    if(_user.is_active){
-        return res.error(400, "Hesabınız doğrulanmamış durumda. Lütfen hesabınızı doğrulayın."); // Kullanıcı hesabı doğrulanmamış ise hata mesajı üretir
+    if (config.verification.phone) {
+        /** Kullanıcı hesabı doğrulanmış mı kontrol eder. */
+        if (!_user.verification.phone_verifyed) {
+            return res.error(400, "Telefon numaranızı doğrulamanız gerekmektedir."); // Kullanıcı hesabı doğrulanmamış ise hata mesajı üretir
+        }
+    }
+
+    if (config.verification.email) {
+        /** Kullanıcı hesabı doğrulanmış mı kontrol eder. */
+        if (!_user.verification.email_verifyed) {
+            return res.error(400, "Eposta adresinizi doğrulamanız gerekmektedir."); // Kullanıcı hesabı doğrulanmamış ise hata mesajı üretir
+        }
     }
 
     /** Kullanıcı kayıtlı şifresi ile göndermiş olduğu şifrenin eşleşmesi kontrol ediliyor */

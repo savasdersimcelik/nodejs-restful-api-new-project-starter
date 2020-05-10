@@ -1,0 +1,1 @@
+/** Eposta Doğrulama İşlemi Yapılacak */
