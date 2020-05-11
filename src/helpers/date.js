@@ -2,7 +2,7 @@
 /**
  * Şuanki zamanı unixtime olarak getirir.
  */
-exports.unix = async () => {
+exports.unixTime = async () => {
     return new Date().getTime();
 }
 

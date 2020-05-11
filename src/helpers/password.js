@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const { Debug, config } = require('../util');
 const { getTimeAdd, toISOString } = require('./date');
+const { generate_random_code } = require('./string');
 const { user } = require('../models');
 
 /**

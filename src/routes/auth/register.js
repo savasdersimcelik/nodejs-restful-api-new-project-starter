@@ -44,19 +44,19 @@ const route = async (req, res) => {
             email_expiration: await date.getTimeAdd(config.verification.expiration_time), // Doğrulama kodunun geçerlilik süresi oluşturuluyor.
         }
 
-    const _user = new user();   // Kullanıcı şeması tanımlanıyor.
-    _user.set(body);            // Kullanıcı dataları set ediliyor.
-    _save = await _user.save(); // Kullanıcı sisteme kayıt ediliyor.
+    const _user = new user();                                   // Kullanıcı şeması tanımlanıyor.
+    _user.set(body);                                            // Kullanıcı dataları set ediliyor.
+    _save = await _user.save();                                 // Kullanıcı sisteme kayıt ediliyor.
 
     if (_save) {
 
         if (config.verification.phone) {
-            await netgsm.send({                     // Kullanıcıya SMS gönderir
-                user: _save._id,                    // SMS gönderilen kullanıcı ID
-                created_by: _save._id,              // SMS gönderen kullanıcı ID
-                gsmno: _save.phone,                 // SMS gönderilen kullanıcı telefon numarası
-                type: 'register',                   // SMS Mesaj içeriği türü
-                code: _save.verification.phone_code // Gönderilen doğrulama kodu
+            await netgsm.send({                                 // Kullanıcıya SMS gönderir
+                user: _save._id,                                // SMS gönderilen kullanıcı ID
+                created_by: _save._id,                          // SMS gönderen kullanıcı ID
+                gsmno: _save.phone,                             // SMS gönderilen kullanıcı telefon numarası
+                type: 'register',                               // SMS Mesaj içeriği türü
+                code: _save.verification.phone_code             // Gönderilen doğrulama kodu
             });
         }
 
@@ -71,10 +71,10 @@ const route = async (req, res) => {
             });
         }
 
-        return res.respond({}, "Kayıt işlemi başarılı bir şekilde gerçekleşti."); // Kayıt işlemi kontrol ediliyor eğer başarılı ise response dönüyor.
+        return res.respond({}, "Kayıt işlemi başarılı bir şekilde gerçekleşti.");   // Kayıt işlemi kontrol ediliyor eğer başarılı ise response dönüyor.
     }
 
-    return res.error(500, "Bir hata meydana geldi. Lütfen tekrar deneyin"); // Kayıt işlemi gerçekleşmezse hata mesajı döner.
+    return res.error(500, "Bir hata meydana geldi. Lütfen tekrar deneyin");         // Kayıt işlemi gerçekleşmezse hata mesajı döner.
 }
 
 

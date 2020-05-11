@@ -12,7 +12,7 @@ Yeni bir NodeJS API projesi oluşturmak için kullanılabilecek basit bir yapı.
 - [x] Kullanıcıya gönderilen smslerin veritabanda saklanması
 - [ ] Doğrulama kodunu tekrar gönder sistemi
 - [ ] Hesap doğrulama sistemi
-- [ ] Şifremi unuttum sistemi
+- [x] Şifremi unuttum ile Şifre sıfırlamak için doğrulama kodu gönderilmesi ( Eposta veya Telefon numarası )
 - [ ] Yeni şifre belirleme
 - [x] Kullanıcı giriş sistemi ( Telefon veya Eposta Adresi )
 - [ ] Giriş yapan kullanıcının FCM ID değerini güncelleme
@@ -39,7 +39,16 @@ initialAdminAccount: {
 src -> util -> config.js Doğrulama sistemileri ile ilgili ayarlarınızı yapabilirsiniz.
 ```json
 verification: {
+    "required": false,
     "expiration_time": 900,
+    "phone": false,
+    "email": false
+}
+```
+### Şifre Sıfırlama
+src -> util -> config.js Şifre sıfırlama işlemleri ile ilgili ayarlarınızı yapabilirsiniz.
+```json
+forgot: {
     "phone": false,
     "email": false
 }
@@ -80,6 +89,7 @@ nodemailer: {
 - [lodash](https://www.npmjs.com/package/lodash)
 - [mongoose](https://www.npmjs.com/package/mongoose)
 - [nodemailer](https://www.npmjs.com/package/nodemailer)
+- [crypto-js](https://www.npmjs.com/package/crypto-js)
 
 # Klasör Yapısı
 
@@ -91,29 +101,3 @@ nodemailer: {
         ├── util                        # Diğer fonksiyonların yer aldığı klasör
         └── app.js
     └── index.js
-
-# API Sorgu ve Parametreler
-### Kullanıcı Kayıt
-- URL: http://localhost:3000/api/auth/register
-- Metot: POST
-```json
-{
-	"first_name": "Savaş Dersim",
-	"last_name": "Çelik",
-	"email": "savasdersimcelik@gmail.com",
-	"phone": "05078614659",
-	"password": "123456"
-}
-```
-
-### Kullanıcı Giriş
-Eposta adresi veya telefon numarası kullanılarak giriş yapılabilir.
-- URL: http://localhost:3000/api/auth/login
-- Metot: POST
-```json
-{
-    "email": "savasdersimcelik@gmail.com",
-    "phone": "05078614659",
-    "password": "123456"
-}
-```

@@ -36,6 +36,9 @@ const joi_error_message = (e) => {
             });
             return new Error(peers + lastItem + " bir tanesini göndermeniz gerekmektedir.");
             break;
+        case 'object.missing':
+            return new Error("Lütfen bilgilerinizi kontrol edin.");
+            break;
         default:
             return new Error("Lütfen " + local.label + " alanını kontrol ediniz.");
             break;

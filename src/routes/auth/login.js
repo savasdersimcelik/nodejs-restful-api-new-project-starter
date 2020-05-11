@@ -21,17 +21,29 @@ const route = async (req, res) => {
         return res.error(400, "Lütfen giriş bilgilerinizi kontrol edin."); // Kullanıcı yoksa hata mesaj döner
     }
 
-    if (config.verification.phone) {
-        /** Kullanıcı hesabı doğrulanmış mı kontrol eder. */
-        if (!_user.verification.phone_verifyed) {
-            return res.error(400, "Telefon numaranızı doğrulamanız gerekmektedir."); // Kullanıcı hesabı doğrulanmamış ise hata mesajı üretir
-        }
-    }
+    /** Sadece doğrulama işlemini tamamlamış kişiler mi giriş yapabilir kontrol ediyor. */
+    if (config.verification.required) {
 
-    if (config.verification.email) {
-        /** Kullanıcı hesabı doğrulanmış mı kontrol eder. */
-        if (!_user.verification.email_verifyed) {
-            return res.error(400, "Eposta adresinizi doğrulamanız gerekmektedir."); // Kullanıcı hesabı doğrulanmamış ise hata mesajı üretir
+        /**
+         * Hesap aktif edilmiş mi kontrol eder.
+         * Eğer hesap aktif edilmemiş ise hangi cihaz aktif edilmemiş kontrol eder.
+         */
+        if (!_user.is_active) {
+            /** Telefon doğrulama işlemi gerekiyor muydu ? */
+            if (config.verification.phone) {
+                /** Kullanıcı hesabı doğrulanmış mı kontrol eder. */
+                if (!_user.verification.phone_verifyed) {
+                    return res.error(400, "Telefon numaranızı doğrulamanız gerekmektedir."); // Kullanıcı hesabı doğrulanmamış ise hata mesajı üretir
+                }
+            }
+
+            /** Email doğrulama işlemi gerekiyor muydu ? */
+            if (config.verification.email) {
+                /** Kullanıcı hesabı doğrulanmış mı kontrol eder. */
+                if (!_user.verification.email_verifyed) {
+                    return res.error(400, "Eposta adresinizi doğrulamanız gerekmektedir."); // Kullanıcı hesabı doğrulanmamış ise hata mesajı üretir
+                }
+            }
         }
     }
 

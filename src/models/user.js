@@ -23,7 +23,8 @@ const user_schema = new Schema({
         cookies_accepted: { type: Schema.Types.Date, default: Date.now }
     },
     type: { type: Schema.Types.String, enum: ["admin", "user"], default: "user" },
-    fcm_token: { type: Schema.Types.String, default: "" },
+    fcm_token: { type: Schema.Types.String, default: "", select: false },
+    forgot_key: { type: Schema.Types.String, default: "", select: false },
     is_active: { type: Schema.Types.Boolean, default: false },
     is_delete: { type: Schema.Types.Boolean, default: false },
     created_at: { type: Schema.Types.Date, default: Date.now },

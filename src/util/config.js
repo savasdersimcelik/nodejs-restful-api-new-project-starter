@@ -16,9 +16,14 @@ module.exports = {
         password: "7BJXH6HjE8",         // Root Yönetici Şifresi
     },
     verification: {
+        required: false,                // Doğrulama işlemi yapılmadan giriş yapılabilsin mi ?
         expiration_time: 900,           // Doğrulama kodu son kullanım süresi saniye cinsinden
         phone: false,                   // SMS doğrulama sistemi aktif mi pasif mi ?
         email: false                    // Email doğrulama sistemi aktif mi pasif mi ?
+    },
+    forgot: {
+        phone: false,                   // Şifre sıfırlama işlemi telefon ile mi yapılacak
+        email: false                    // Şifre sıfırlama işlemi eposta ile mi yapılacak
     },
     netgsm: {
         sender: "GÖNDERİCİ ADI",        // Netgsm Gönderici Adı
