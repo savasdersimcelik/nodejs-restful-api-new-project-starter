@@ -19,6 +19,7 @@ Yeni bir NodeJS API projesi oluşturmak için kullanılabilecek basit bir yapı.
 - [x] Hesap doğrulama sistemi.  ( Zorunluluk Config dosyasından ayarlanabilir. )
     - [x] Eposta adresi doğrulama  ( Zorunluluk Config dosyasından ayarlanabilir. )
     - [x] Telefon numarası doğrulama  ( Zorunluluk Config dosyasından ayarlanabilir. )
+    - [x] Her ikiside zorunlu ilse biri tamamlandıktan sonra diğerine ait kodun gönderilmesi.
 - [x] Şifremi unuttum sistemi
     - [x] Şifre sıfırlama işlemi eposta veya telefon numarası kullanılabilir ( Config dosyasından ayarlanabilir. )
     - [x] Doğrulama kodunun gönderilmesi
@@ -29,6 +30,7 @@ Yeni bir NodeJS API projesi oluşturmak için kullanılabilecek basit bir yapı.
     - [x] Yeni şifre eski şifre ile aynı olabilir mi kontrol edilmesi. ( Config dosyasından ayarlanabilir. )
 - [x] Kullanıcı giriş sistemi ( Telefon veya Eposta Adresi )
     - [x] Süreli veya Süresiz Bearer token oluşturulması. ( Config dosyasından ayarlanabilir. )
+    - [x] Doğrulama zorunlu ise kontrol sağlanıp kodun gönderilmesi ve yönlendirme
 - [ ] Giriş yapan kullanıcının FCM ID değerini güncelleme
 - [ ] Kullanıcıya Google Firebase FCM üzerinden bildirim gönderme
 - [ ] Kullanıcı profil bilgilerini düzenleme
