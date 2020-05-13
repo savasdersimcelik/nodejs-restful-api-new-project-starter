@@ -125,6 +125,9 @@ const message_content = async (param) => {
         case 'forgot_password':
             return config.projectName + ' Şifre sıfırlamak için doğrulama kodunuz: ' + param.code;
             break;
+        case 'verification':
+            return config.projectName + ' Telefon numaranızı doğrulamak için kodunuz: ' + param.code;
+            break;
         default:
             return param.message;
     }

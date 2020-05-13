@@ -25,7 +25,6 @@ const forgat_password_mail_template = async (param) => {
 }
 
 const register_mail_template = async (param) => {
-    console.log(config.base_url + config.nodemailer.logo)
     let html = await read_document(Path.resolve(config.nodemailer.templates_dir, 'register.html'), "utf-8");
     html = html_parser(html, {
         code: param.code,

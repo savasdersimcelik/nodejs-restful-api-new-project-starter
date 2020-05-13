@@ -16,7 +16,9 @@ Yeni bir NodeJS API projesi oluşturmak için kullanılabilecek basit bir yapı.
     - [x] Kullanıcıya gönderilen smslerin veritabanda saklanması.
 - [x] NodeMailler entegrasyonu. ( Mail Gönderimi için)
 - [ ] Doğrulama kodunu tekrar gönder sistemi
-- [ ] Hesap doğrulama sistemi
+- [x] Hesap doğrulama sistemi.  ( Zorunluluk Config dosyasından ayarlanabilir. )
+    - [x] Eposta adresi doğrulama  ( Zorunluluk Config dosyasından ayarlanabilir. )
+    - [x] Telefon numarası doğrulama  ( Zorunluluk Config dosyasından ayarlanabilir. )
 - [x] Şifremi unuttum sistemi
     - [x] Şifre sıfırlama işlemi eposta veya telefon numarası kullanılabilir ( Config dosyasından ayarlanabilir. )
     - [x] Doğrulama kodunun gönderilmesi

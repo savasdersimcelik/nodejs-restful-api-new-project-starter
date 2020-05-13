@@ -2,6 +2,7 @@ const { joi, joi_error_message, config } = require('../../util');
 const { user } = require('../../models');
 const { hash_password, generate_random_code, date, netgsm, mail } = require('../../helpers');
 const { register_mail_template } = require('../../templates');
+const CryptoJS = require("crypto-js");
 
 /**
  * Yeni kayıt olacak kullanıcılar için post ile gönderilecek data şeması
@@ -29,9 +30,9 @@ const route = async (req, res) => {
         return res.error(400, "Bu eposta adresi ile kayıtlı bir kullanıcı bulunmakta.");
     }
 
-    body.password = await hash_password(body.password); // Kullanıcı şifresi hashleniyor.
-    body.name = body.first_name + ' ' + body.last_name; // Kullanıcı adı ve soyadı birleştiriliyor.
-    body.is_active = config.verification.phone || config.verification.email ? false : true, // Herhangi bir doğrulama sistemi aktif ise hesap aktif false olur
+    body.password = await hash_password(body.password);                                         // Kullanıcı şifresi hashleniyor.
+    body.name = body.first_name + ' ' + body.last_name;                                         // Kullanıcı adı ve soyadı birleştiriliyor.
+    body.is_active = config.verification.phone || config.verification.email ? false : true,     // Herhangi bir doğrulama sistemi aktif ise hesap aktif false olur
 
         body.verification = {
             phone_verifyed: config.verification.phone ? false : true,                           // Eğer doğrulama sistemini kontrol eder.
@@ -44,35 +45,61 @@ const route = async (req, res) => {
             email_expiration: await date.getTimeAdd(config.verification.expiration_time),       // Doğrulama kodunun geçerlilik süresi oluşturuluyor.
         }
 
-    const _user = new user();                                   // Kullanıcı şeması tanımlanıyor.
+    let _user = new user();                                   // Kullanıcı şeması tanımlanıyor.
     _user.set(body);                                            // Kullanıcı dataları set ediliyor.
-    _save = await _user.save();                                 // Kullanıcı sisteme kayıt ediliyor.
+    _user = await _user.save();                                 // Kullanıcı sisteme kayıt ediliyor.
 
-    if (_save) {
+    if (_user) {
 
         if (config.verification.phone) {
             await netgsm.send({                                 // Kullanıcıya SMS gönderir
-                user: _save._id,                                // SMS gönderilen kullanıcı ID
-                created_by: _save._id,                          // SMS gönderen kullanıcı ID
-                gsmno: _save.phone,                             // SMS gönderilen kullanıcı telefon numarası
+                user: _user._id,                                // SMS gönderilen kullanıcı ID
+                created_by: _user._id,                          // SMS gönderen kullanıcı ID
+                gsmno: _user.phone,                             // SMS gönderilen kullanıcı telefon numarası
                 type: 'register',                               // SMS Mesaj içeriği türü
-                code: _save.verification.phone_code             // Gönderilen doğrulama kodu
+                code: _user.verification.phone_code             // Gönderilen doğrulama kodu
             });
         }
 
         if (config.verification.email) {
             await mail.send({                                   // Kullanıcıya mail gönderir
-                email: _save.email,                             // Kullanıcı eposta adresi
+                email: _user.email,                             // Kullanıcı eposta adresi
                 subject: 'Eposta Doğrulama',                    // Mail Başlığı
                 html: await register_mail_template({            // Mail template
-                    code: _save.verification.email_code,        // Doğrulama kodu
-                    name: _save.name                            // Kullanıcının tam adı
+                    code: _user.verification.email_code,        // Doğrulama kodu
+                    name: _user.name                            // Kullanıcının tam adı
                 })
             });
         }
 
+        /** Doğrulama işlemi yapılması gerekiyor mu ? Kontrol eder */
+        if (config.verification.email || config.verification.phone) {
+
+            /** Doğrulama işlemi nasıl gerçekleşecek */
+            const verif_type = config.verification.phone ? 'phone' : 'email';
+
+            /** Doğrulama işlemi için özel anahtar oluşturur */
+            const data_stringify = JSON.stringify({ _id: _user._id, type: verif_type, expiration: await date.getTimeAdd(config.verification.expiration_time) });
+            
+            /** Özel anahtarı oluşturuluyor. */
+            const verification_key = CryptoJS.AES.encrypt(data_stringify, config.secretKey);
+
+            _user.set({                                         // Kullanıcı yeni datalarını set eder
+                verification: {
+                    key: verification_key.toString(),           // Doğrulama kodu için üretilen hash
+                }
+            });
+            _save = await _user.save();                         // Yeni datalar sisteme ekleniyor.
+
+            if (_save) {
+                /** Kayıt işlemi kontrol ediliyor eğer başarılı ise response dönüyor. */
+                return res.respond({ key: _save.verification.key }, "Kayıt işlemi başarılı bir şekilde gerçekleşti. Artık hesabınızı doğrulayabilirsiniz.");
+            }
+
+        }
+
         /** Kayıt işlemi kontrol ediliyor eğer başarılı ise response dönüyor. */
-        return res.respond({}, "Kayıt işlemi başarılı bir şekilde gerçekleşti.");
+        return res.respond({}, "Kayıt işlemi başarılı bir şekilde gerçekleşti. Artık giriş yapabilirsiniz.");
     }
 
     /** Kayıt işlemi gerçekleşmezse hata mesajı döner. */

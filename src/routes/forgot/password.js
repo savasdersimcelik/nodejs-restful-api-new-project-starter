@@ -22,17 +22,20 @@ const route = async (req, res) => {
         return res.error(400, "Böyle bir kullanıcı bulunamadı. Lütfen bilgilerinizi kontrol edin."); // Kullanıcı yoksa hata mesaj döner
     }
 
-    const data_stringify = JSON.stringify({ _id: _user._id, type: forgot_type });   // Datalar JSON formatına dönüştürülüyor.
-    const forgot_key = CryptoJS.AES.encrypt(data_stringify, config.secretKey);      // Datalar HASH'leniyor
+    /** Dataları JSON formatına dönüştürür */
+    const data_stringify = JSON.stringify({ _id: _user._id, type: forgot_type, expiration: await date.getTimeAdd(config.forgot.expiration_time) });
+    
+    /** Özel Anahtar Oluşturuluyor */
+    const verification_key = CryptoJS.AES.encrypt(data_stringify, config.secretKey);
 
     _user.set({                                                 // Kullanıcı yeni datalarını set eder
         verification: {
+            key: verification_key.toString(),                   // Doğrulama kodu için üretilen hash
             email_code: await generate_random_code(6, true),    // Eposta için doğrulama kodu üretir
             phone_code: await generate_random_code(6, true),    // Telefon için doğrulama kodu üretir
             email_expiration: await date.getTimeAdd(config.verification.expiration_time),   // Doğrulama kodu geçerlilik süresi
             phone_expiration: await date.getTimeAdd(config.verification.expiration_time),   // Doğrulama kodu geçerlilik süresi
-        },
-        forgot_key: forgot_key.toString()                       // Doğrulama kodu için üretilen hash
+        }
     });
     _user = await _user.save();                                 // Yeni kodları sisteme ekler.
 
@@ -61,7 +64,7 @@ const route = async (req, res) => {
         if (code_send) {
 
             /** Doğrulama kodu değiştirilirse başarılı response döner */
-            return res.respond({ key: _user.forgot_key }, "Doğrulama kodu gönderildi.");
+            return res.respond({ key: _user.verification.key }, "Doğrulama kodu gönderildi.");
         }
     }
 

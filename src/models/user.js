@@ -8,6 +8,7 @@ const user_schema = new Schema({
     phone: { type: Schema.Types.String, required: true, unique: true },
     password: { type: Schema.Types.String, required: true, select: false },
     verification: {
+        key: { type: Schema.Types.String, default: "", select: false },
         phone_code: { type: Schema.Types.String, default: "000000", select: false },
         phone_expiration: { type: Schema.Types.Number, default: "00000", select: false },
         phone_verifyed: { type: Schema.Types.Boolean, default: false },
@@ -24,7 +25,6 @@ const user_schema = new Schema({
     },
     type: { type: Schema.Types.String, enum: ["admin", "user"], default: "user" },
     fcm_token: { type: Schema.Types.String, default: "", select: false },
-    forgot_key: { type: Schema.Types.String, default: "", select: false },
     is_active: { type: Schema.Types.Boolean, default: false },
     is_delete: { type: Schema.Types.Boolean, default: false },
     created_at: { type: Schema.Types.Date, default: Date.now },

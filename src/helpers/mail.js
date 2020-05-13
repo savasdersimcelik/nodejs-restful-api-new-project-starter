@@ -31,7 +31,3 @@ exports.send = async (param) => {
     }
     return false;
 }
-
-const asda = (asdasd = {}) => {
-
-}
