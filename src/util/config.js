@@ -4,6 +4,7 @@ module.exports = {
     projectName: "Nodejs Yeni Proje",   // Projenin Adı
     mongoConnectionString: "mongodb://localhost:27017/node-new-project-start",  // MongoDB bağlantı adresi
     secretKey: "&JxJf?nGatkj#cXApma8jf3U7evuXwd2",  // Hash sistemi için güvenlik anahtarı
+    jwt_expiration: 0,                  // JWT Token kullanım süresi saniye cinsinden ( İptal etmek için: 0)
     pagination: 10,                     // Search sisteminde listenecek içerisik sayısı
     base_url: "http://localhost:3000/", // Serverın çalıştığı domain veya ip adresi
     PORT: 3000,                         // Serverın çalıştığı port numarası
@@ -37,7 +38,7 @@ module.exports = {
         port: 587,                      // Mail server port adresi
         user: "info@example.com",       // Mail gönderilecek eposta adresi
         password: "MAİL ŞİFRESİ",       // Mail gönderilecek eposta adresi şifresi
-        rejectUnauthorized: false,      
+        rejectUnauthorized: false,      // Yetkisiz ise reddet
         logo: "uploads/mail_logo.png",  // Mail içerisindeki logo
         templates_dir: Path.resolve(__dirname, "../", "templates")  // Mail temalarının bulunduğu klasör
     },

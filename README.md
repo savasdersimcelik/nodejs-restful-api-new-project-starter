@@ -26,6 +26,7 @@ Yeni bir NodeJS API projesi oluşturmak için kullanılabilecek basit bir yapı.
     - [x] Yeni şifre belirlenmesi ve özel anahtarın geçerlilik süresinin kontrolü
     - [x] Yeni şifre eski şifre ile aynı olabilir mi kontrol edilmesi. ( Config dosyasından ayarlanabilir. )
 - [x] Kullanıcı giriş sistemi ( Telefon veya Eposta Adresi )
+    - [x] Süreli veya Süresiz Bearer token oluşturulması. ( Config dosyasından ayarlanabilir. )
 - [ ] Giriş yapan kullanıcının FCM ID değerini güncelleme
 - [ ] Kullanıcıya Google Firebase FCM üzerinden bildirim gönderme
 - [ ] Kullanıcı profil bilgilerini düzenleme

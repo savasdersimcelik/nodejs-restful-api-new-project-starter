@@ -4,9 +4,13 @@ const { config } = require('../util');
 /**
  * Bearer token oluşturur
  * @param {ObjectId} _id: Bearer token oluşturulacak kullanıcı ID değeri 
- * @param {*} type: Kullanıcı türü
+ * @param {String} type: Kullanıcı türü
  */
 const encode_token = (_id, type) => {
+    if (config.jwt_expiration > 0) {
+        return jwt.sign({ _id: _id, type: type }, config.secretKey, { expiresIn: config.jwt_expiration });
+    }
+
     return jwt.sign({ _id: _id, type: type }, config.secretKey);
 }
 
