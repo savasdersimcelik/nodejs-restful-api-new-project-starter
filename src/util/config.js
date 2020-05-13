@@ -29,18 +29,18 @@ module.exports = {
         email: true                     // Şifre sıfırlama işlemi eposta ile mi yapılacak
     },
     netgsm: {
-        sender: "8503043053",           // Netgsm Gönderici Adı
-        usercode: "8503043053",         // Netgsm Kullanıcı Giriş Bilgisi
-        password: "F1A74A"              // Netgsm Şifre
+        sender: "GÖNDERİCİ ADI",        // Netgsm Gönderici Adı
+        usercode: "USER CODE",          // Netgsm Kullanıcı Giriş Bilgisi
+        password: "NETGSM ŞİFRE"        // Netgsm Şifre
     },
     nodemailer: {
-        host: "mail.dio.com.tr",        // Mail server host name
+        host: "mail.example.com",       // Mail server host name
         port: 587,                      // Mail server port adresi
-        user: "savas@dio.com.tr",       // Mail gönderilecek eposta adresi
-        password: "Savas-909",          // Mail gönderilecek eposta adresi şifresi
+        user: "info@example.com",       // Mail gönderilecek eposta adresi
+        password: "MAİL ŞİFRESİ",       // Mail gönderilecek eposta adresi şifresi
         rejectUnauthorized: false,      
         logo: "uploads/mail_logo.png",  // Mail içerisindeki logo
-        templates_dir: Path.resolve(__dirname, "../", "templates") // Mail temalarının bulunduğu klasör
+        templates_dir: Path.resolve(__dirname, "../", "templates")  // Mail temalarının bulunduğu klasör
     },
     uploads: {
         folder: "uploads/",                                             // Upload klasörünün adı

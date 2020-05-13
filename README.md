@@ -40,7 +40,7 @@ Yeni bir NodeJS API projesi oluşturmak için kullanılabilecek basit bir yapı.
 src -> util -> config.js Dosyası içerisinde bilgileri ( Aşağıda yer alan bilgiler ) kendinize göre değiştirin.
 ```json
 initialAdminAccount: {
-    "first_name": "Savaş Dersim",   // Test
+    "first_name": "Savaş Dersim",
     "last_name": "Çelik",
     "name": "Savaş Dersim Çelik",
     "email": "admin@example.com",
