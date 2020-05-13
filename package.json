@@ -6,10 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
-    "build-start": "cd.. && cd bizimtaksi-admin && npm run build",
-    "build-copy": "xcopy C:\\Users\\IYO11\\Desktop\\nodejs\\bizimtaksi-admin\\build C:\\Users\\IYO11\\Desktop\\nodejs\\bizimtaksi\\admin /E /S /C /G /H",
-    "build-live": "git add . && git commit -m \"live\" && git push heroku master && heroku open"
+    "start": "node index.js"
   },
   "keywords": [],
   "license": "ISC",

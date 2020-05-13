@@ -17,27 +17,29 @@ module.exports = {
     },
     verification: {
         required: false,                // Doğrulama işlemi yapılmadan giriş yapılabilsin mi ?
-        expiration_time: 900,           // Doğrulama kodu son kullanım süresi saniye cinsinden
+        expiration_time: 120,           // Doğrulama kodu son kullanım süresi saniye cinsinden
         phone: false,                   // SMS doğrulama sistemi aktif mi pasif mi ?
         email: false                    // Email doğrulama sistemi aktif mi pasif mi ?
     },
     forgot: {
+        old_password: false,            // Yeni şifre, eski şifre ile aynı olabilir mi? ( False: Olamaz True: Olabilir)
+        expiration_time: 300,           // Yeni şifre değiştirme süresi saniye cinsinden
         phone: false,                   // Şifre sıfırlama işlemi telefon ile mi yapılacak
-        email: false                    // Şifre sıfırlama işlemi eposta ile mi yapılacak
+        email: true                     // Şifre sıfırlama işlemi eposta ile mi yapılacak
     },
     netgsm: {
-        sender: "GÖNDERİCİ ADI",        // Netgsm Gönderici Adı
-        usercode: "USER CODE",          // Netgsm Kullanıcı Giriş Bilgisi
-        password: "NETGSM ŞİFRE"        // Netgsm Şifre
+        sender: "8503043053",           // Netgsm Gönderici Adı
+        usercode: "8503043053",         // Netgsm Kullanıcı Giriş Bilgisi
+        password: "F1A74A"              // Netgsm Şifre
     },
     nodemailer: {
-        host: "mail.example.com",       // Mail server host name
+        host: "mail.dio.com.tr",        // Mail server host name
         port: 587,                      // Mail server port adresi
-        user: "info@example.com",       // Mail gönderilecek eposta adresi
-        password: "MAİL ŞİFRESİ",       // Mail gönderilecek eposta adresi şifresi
-        rejectUnauthorized: false,      
-        logo: "uploads/mail_logo.png",  // Mail içerisindeki logo
-        templates_dir: Path.resolve(__dirname, "../", "templates")  // Mail temalarının bulunduğu klasör
+        user: "savas@dio.com.tr",       // Mail gönderilecek eposta adresi
+        password: "Savas-909",          // Mail gönderilecek eposta adresi şifresi
+        rejectUnauthorized: false,
+        logo: "uploads/mail_logo.png", // Mail içerisindeki logo
+        templates_dir: Path.resolve(__dirname, "../", "templates") // Mail temalarının bulunduğu klasör
     },
     uploads: {
         folder: "uploads/",                                             // Upload klasörünün adı

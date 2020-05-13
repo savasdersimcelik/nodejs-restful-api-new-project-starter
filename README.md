@@ -7,13 +7,24 @@ Yeni bir NodeJS API projesi oluşturmak için kullanılabilecek basit bir yapı.
 
 ### Hedeflenenler
 - [x] Kullanıcı kayıt sistemi
+    - [x] Eposta kullanılıyor mu diye kontrol ediliyor.
+    - [x] Telefon numarası kullanılıyor mu diye kontrol ediliyor.
 - [x] Kayıt sonrası doğrulama kodunu SMS olarak gönderme
-- [x] Kayıt sonrası doğrulama kodunu Eposta olarak gönderme
-- [x] Kullanıcıya gönderilen smslerin veritabanda saklanması
+    - [x] Eposta, Telefon veya Her ikisi aynı anda gönderilebilir. ( Config dosyasından ayarlanabilir. )
+    - [x] Kodların son kullanma tarihleri sisteme ekleniyor.    ( Son kullanım süresi Config dosyasından ayarlanabilir )
+- [x] NetGSM SMS şirketi entegrasyonu. ( SMS Gönderimi için ) 
+    - [x] Kullanıcıya gönderilen smslerin veritabanda saklanması.
+- [x] NodeMailler entegrasyonu. ( Mail Gönderimi için)
 - [ ] Doğrulama kodunu tekrar gönder sistemi
 - [ ] Hesap doğrulama sistemi
-- [x] Şifremi unuttum ile Şifre sıfırlamak için doğrulama kodu gönderilmesi ( Eposta veya Telefon numarası )
-- [ ] Yeni şifre belirleme
+- [x] Şifremi unuttum sistemi
+    - [x] Şifre sıfırlama işlemi eposta veya telefon numarası kullanılabilir ( Config dosyasından ayarlanabilir. )
+    - [x] Doğrulama kodunun gönderilmesi
+    - [x] Şifre sıfırlamak için özel anahtarın oluşturulması
+    - [x] Şifre sıfırlamak için doğrulama sistemi
+    - [x] Doğrulama sonrası şifre sıfırlama için son kullanım tarihi ile özel anahtarın oluşturulması.
+    - [x] Yeni şifre belirlenmesi ve özel anahtarın geçerlilik süresinin kontrolü
+    - [x] Yeni şifre eski şifre ile aynı olabilir mi kontrol edilmesi. ( Config dosyasından ayarlanabilir. )
 - [x] Kullanıcı giriş sistemi ( Telefon veya Eposta Adresi )
 - [ ] Giriş yapan kullanıcının FCM ID değerini güncelleme
 - [ ] Kullanıcıya Google Firebase FCM üzerinden bildirim gönderme
@@ -49,6 +60,8 @@ verification: {
 src -> util -> config.js Şifre sıfırlama işlemleri ile ilgili ayarlarınızı yapabilirsiniz.
 ```json
 forgot: {
+    "old_password": false,
+    "expiration_time": 300,
     "phone": false,
     "email": false
 }

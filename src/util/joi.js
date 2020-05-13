@@ -17,7 +17,7 @@ const joi_error_message = (e) => {
 
     console.log({ local, code })
     console.log({ err })
-
+    
     switch (code) {
         case 'any.required':
             return new Error(local.label + " gereklidir.");

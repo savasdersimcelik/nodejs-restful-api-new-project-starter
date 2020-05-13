@@ -33,7 +33,8 @@ const route = async (req, res) => {
             if (config.verification.phone) {
                 /** Kullanıcı hesabı doğrulanmış mı kontrol eder. */
                 if (!_user.verification.phone_verifyed) {
-                    return res.error(400, "Telefon numaranızı doğrulamanız gerekmektedir."); // Kullanıcı hesabı doğrulanmamış ise hata mesajı üretir
+                    /** Kullanıcı hesabı doğrulanmamış ise hata mesajı üretir */
+                    return res.error(400, { phone_verifyed: false, general_error: "Telefon numaranızı doğrulamanız gerekmektedir." });
                 }
             }
 
@@ -41,7 +42,8 @@ const route = async (req, res) => {
             if (config.verification.email) {
                 /** Kullanıcı hesabı doğrulanmış mı kontrol eder. */
                 if (!_user.verification.email_verifyed) {
-                    return res.error(400, "Eposta adresinizi doğrulamanız gerekmektedir."); // Kullanıcı hesabı doğrulanmamış ise hata mesajı üretir
+                    /** Kullanıcı hesabı doğrulanmamış ise hata mesajı üretir */
+                    return res.error(400, { email_verifyed: false, general_error: "Eposta adresinizi doğrulamanız gerekmektedir." });
                 }
             }
         }
@@ -50,11 +52,15 @@ const route = async (req, res) => {
     /** Kullanıcı kayıtlı şifresi ile göndermiş olduğu şifrenin eşleşmesi kontrol ediliyor */
     const match = await match_password(body.password, _user.password);
     if (!match) {
-        return res.error(400, "Lütfen giriş bilgilerinizi kontrol edin."); // Şifreler aynı değilse hata mesajı döner
+
+        /** Şifreler aynı değilse hata mesajı döner */
+        return res.error(400, "Lütfen giriş bilgilerinizi kontrol edin.");
     }
 
     const bearer = await encode_token(_user._id, _user.type); // Bearer token üretiliyor
-    return res.respond({ user: _.omit(_user.toObject(), "password"), bearer }); // Kullanıcı bilgilerinden password çıkartılıp response dönüyor.
+
+    /** Kullanıcı bilgilerinden password çıkartılıp response dönüyor. */
+    return res.respond({ user: _.omit(_user.toObject(), "password"), bearer });
 }
 
 module.exports = {
