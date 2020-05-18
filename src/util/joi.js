@@ -15,9 +15,6 @@ const joi_error_message = (e) => {
         return generic_error();
     }
 
-    console.log({ local, code })
-    console.log({ err })
-    
     switch (code) {
         case 'any.required':
             return new Error(local.label + " gereklidir.");

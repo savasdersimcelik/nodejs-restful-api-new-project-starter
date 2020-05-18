@@ -64,7 +64,7 @@ const route = async (req, res) => {
                 });
 
                 /** Kullanıcı hesabı doğrulanmamış ise hata mesajı üretir */
-                return res.error(400, { key: _user.verification.key, general_error: "Telefon numaranızı doğrulamanız gerekmektedir." });
+                return res.error(400, { key: _user.verification.key, general_error: "Telefon numaranızı doğrulamanız gerekmektedir. Doğrulama kodu gönderildi." });
             }
 
             /** Email doğrulama işlemi gerekiyor muydu ve Gerekiyorsa kullanıcı doğrulamış mı ? */
@@ -81,7 +81,7 @@ const route = async (req, res) => {
                 });
 
                 /** Kullanıcı hesabı doğrulanmamış ise hata mesajı üretir */
-                return res.error(400, { key: _user.verification.key, general_error: "Eposta adresinizi doğrulamanız gerekmektedir." });
+                return res.error(400, { key: _user.verification.key, general_error: "Eposta adresinizi doğrulamanız gerekmektedir. Doğrulama kodu gönderildi." });
             }
 
         }
