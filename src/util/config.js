@@ -34,13 +34,13 @@ module.exports = {
         password: "NETGSM ŞİFRE"        // Netgsm Şifre
     },
     nodemailer: {
-        host: "mail.dio.com.tr",        // Mail server host name
+        host: "mail.example.com",       // Mail server host name
         port: 587,                      // Mail server port adresi
-        user: "savas@dio.com.tr",       // Mail gönderilecek eposta adresi
-        password: "Savas-909",          // Mail gönderilecek eposta adresi şifresi
+        user: "info@example.com",       // Mail gönderilecek eposta adresi
+        password: "MAİL ŞİFRESİ",       // Mail gönderilecek eposta adresi şifresi
         rejectUnauthorized: false,      
         logo: "uploads/mail_logo.png",  // Mail içerisindeki logo
-        templates_dir: Path.resolve(__dirname, "../", "templates") // Mail temalarının bulunduğu klasör
+        templates_dir: Path.resolve(__dirname, "../", "templates")  // Mail temalarının bulunduğu klasör
     },
     uploads: {
         folder: "uploads/",                                             // Upload klasörünün adı
