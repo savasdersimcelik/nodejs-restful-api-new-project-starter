@@ -29,7 +29,7 @@ const route = async (req, res) => {
     if (email_control) {
         return res.error(400, "Bu eposta adresi ile kayıtlı bir kullanıcı bulunmakta.");
     }
-
+    
     body.password = await hash_password(body.password);                                         // Kullanıcı şifresi hashleniyor.
     body.name = body.first_name + ' ' + body.last_name;                                         // Kullanıcı adı ve soyadı birleştiriliyor.
     body.is_active = config.verification.phone || config.verification.email ? false : true,     // Herhangi bir doğrulama sistemi aktif ise hesap aktif false olur

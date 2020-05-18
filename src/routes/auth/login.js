@@ -18,7 +18,7 @@ const route = async (req, res) => {
     let { body, params, query } = req;
 
     /** Kullanıcı eposta adresi veya telefon numarasına göre veritabanına göre sorgu */
-    let _user = await user.findOne({ $or: [{ phone: body.phone }, { email: body.email }] }).select("+password");
+    let _user = await user.findOne({ $or: [{ phone: body.phone }, { email: body.email }], is_delete: false }).select("+password");
     if (!_user) {
         return res.error(400, "Lütfen giriş bilgilerinizi kontrol edin."); // Kullanıcı yoksa hata mesaj döner
     }

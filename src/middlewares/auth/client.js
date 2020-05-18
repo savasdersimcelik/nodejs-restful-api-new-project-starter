@@ -1,3 +1,5 @@
+const { user } = require('../../models')
+
 /**
  * Herhangi bir route erişim izni gerekiyorsa
  * Bearer token'dan gelen ID değerini veritabanında sorgular

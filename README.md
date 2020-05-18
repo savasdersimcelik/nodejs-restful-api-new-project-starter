@@ -31,9 +31,10 @@ Yeni bir NodeJS RESTful API projesi oluşturmak için geliştirilmiştir.
 - [x] Kullanıcı giriş sistemi ( Telefon veya Eposta Adresi )
     - [x] Süreli veya Süresiz Bearer token oluşturulması. ( Config dosyasından ayarlanabilir. )
     - [x] Doğrulama zorunlu ise kontrol sağlanıp kodun gönderilmesi ve yönlendirme
-- [ ] Giriş yapan kullanıcının FCM ID değerini güncelleme
-- [ ] Kullanıcıya Google Firebase FCM üzerinden bildirim gönderme
-- [ ] Kullanıcı profil bilgilerini düzenleme
+- [x] Giriş yapan kullanıcının FCM ID değerini güncelleme.
+- [ ] Kullanıcıya Google Firebase FCM üzerinden bildirim gönderme.
+- [ ] Kullanıcıya Özel SMS göndermebilme.
+- [ ] Kullanıcı profil bilgilerini düzenleme.
 
 # Ayarlar
 
