@@ -63,6 +63,7 @@ const route = async (req, res) => {
 
         if (config.verification.email) {
             await mail.send({                                   // Kullanıcıya mail gönderir
+                name: _user.name,                               // Kullanıcı adı
                 email: _user.email,                             // Kullanıcı eposta adresi
                 subject: 'Eposta Doğrulama',                    // Mail Başlığı
                 html: await register_mail_template({            // Mail template

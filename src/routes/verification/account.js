@@ -25,7 +25,7 @@ const route = async (req, res) => {
         return res.error(500, "Bilinmeyen bir hata meydana geldi.");
     }
 
-    if (!decrypt_key.type) {
+    if (!decrypt_key.type && (decrypt_key.type == 'email' || decrypt_key.type == 'phone')) {
 
         /** Gelen key içerisinde type var mı kontrol eder. Yoksa Hata mesajı döner */
         return res.error(500, "Bilinmeyen bir hata meydana geldi. Lütfen tekrar deneyin.");
@@ -100,6 +100,7 @@ const route = async (req, res) => {
     if (config.verification.required && config.verification.email && !_user.verification.email_verifyed) {
 
         await mail.send({                                   // Kullanıcıya mail gönderir
+            name: _user.name,                               // Kullanıcı eposta adresi
             email: _user.email,                             // Kullanıcı eposta adresi
             subject: 'Eposta Doğrulama',                    // Mail Başlığı
             html: await verification_mail_template({        // Mail template

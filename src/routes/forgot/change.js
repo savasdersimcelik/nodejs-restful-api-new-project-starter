@@ -17,6 +17,12 @@ const route = async (req, res) => {
     const bytes = CryptoJS.AES.decrypt(body.key, config.secretKey);         // Kullanıcıdan gelen KEY çözümlüyor.
     const decrypt_key = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));      // Çöüzmlenen değer UTF-8 olarak string hale getiriliyor
 
+    if (!decrypt_key.type && (decrypt_key.type == 'email' || decrypt_key.type == 'phone')) {
+
+        /** Gelen key içerisinde type var mı kontrol eder. Yoksa Hata mesajı döner */
+        return res.error(500, "Bilinmeyen bir hata meydana geldi. Lütfen tekrar deneyin.");
+    }
+
     /**  KEY içerisindeki datalar kontrol ediliyor. */
     if (!decrypt_key._id && !decrypt_key.expiration) {
 
@@ -32,7 +38,7 @@ const route = async (req, res) => {
     }
 
     /** Gönderilen KEY ile ilgili veritabanında ki kullanıcı sorgular */
-    const _user = await user.findOne({ _id: decrypt_key._id, 'verification.key': body.key }).select('+password');
+    const _user = await user.findOne({ _id: decrypt_key._id, 'verification.key': body.key }).select("+password");
     if (!_user) {
 
         /** Eğer veritabanında kullanıcı yoksa hata mesajı dönerir. */

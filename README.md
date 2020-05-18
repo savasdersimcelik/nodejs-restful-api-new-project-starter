@@ -15,7 +15,7 @@ Yeni bir NodeJS API projesi oluşturmak için kullanılabilecek basit bir yapı.
 - [x] NetGSM SMS şirketi entegrasyonu. ( SMS Gönderimi için ) 
     - [x] Kullanıcıya gönderilen smslerin veritabanda saklanması.
 - [x] NodeMailler entegrasyonu. ( Mail Gönderimi için)
-- [ ] Doğrulama kodunu tekrar gönder sistemi
+- [x] Doğrulama kodunu tekrar gönder sistemi
 - [x] Hesap doğrulama sistemi.  ( Zorunluluk Config dosyasından ayarlanabilir. )
     - [x] Eposta adresi doğrulama  ( Zorunluluk Config dosyasından ayarlanabilir. )
     - [x] Telefon numarası doğrulama  ( Zorunluluk Config dosyasından ayarlanabilir. )

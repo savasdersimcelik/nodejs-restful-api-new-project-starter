@@ -24,7 +24,7 @@ const route = async (req, res) => {
         return res.error(500, "Bilinmeyen bir hata meydana geldi.");
     }
 
-    if (!decrypt_key.type) {
+    if (!decrypt_key.type && (decrypt_key.type == 'email' || decrypt_key.type == 'phone')) {
 
         /** Gelen key içerisinde type var mı kontrol eder. Yoksa Hata mesajı döner */
         return res.error(500, "Bilinmeyen bir hata meydana geldi. Lütfen tekrar deneyin.");
@@ -61,8 +61,8 @@ const route = async (req, res) => {
     * Şifre değişikliği için hash oluşturuyor.
     * Datalar JSON formatına dönüştürülüyor.
     */
-    const data_stringify = JSON.stringify({ _id: _user._id, expiration: await date.getTimeAdd(config.forgot.expiration_time) });
-    
+    const data_stringify = JSON.stringify({ _id: _user._id, type: decrypt_key.type, expiration: await date.getTimeAdd(config.forgot.expiration_time) });
+
     /** Özel Anahtar Oluşturuluyor */
     const verification_key = CryptoJS.AES.encrypt(data_stringify, config.secretKey);
 
@@ -74,6 +74,7 @@ const route = async (req, res) => {
     _user = await _user.save();                         // Değişiklikleri kayıt ediyoruz.
 
     if (_user) {
+        
         /** Doğrulama kodu değiştirilirse başarılı response döner */
         return res.respond({ key: _user.verification.key }, "Artık şifrenizi değiştirebilirsiniz.");
     }

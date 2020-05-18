@@ -71,9 +71,10 @@ const route = async (req, res) => {
             if (config.verification.email && !_user.verification.email_verifyed) {
 
                 await mail.send({                                   // Kullanıcıya mail gönderir
+                    name: _user.name,                               // Kullanıcı adı
                     email: _user.email,                             // Kullanıcı eposta adresi
                     subject: 'Eposta Doğrulama',                    // Mail Başlığı
-                    html: await verification_mail_template({        // Mail template
+                    html: await verification_mail_template({            // Mail template
                         code: _user.verification.email_code,        // Doğrulama kodu
                         name: _user.name                            // Kullanıcının tam adı
                     })

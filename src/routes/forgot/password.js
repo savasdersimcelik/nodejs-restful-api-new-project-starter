@@ -19,12 +19,14 @@ const route = async (req, res) => {
     /** Gönderilen kullanıcı bilgileri ile ilgili veritabanında sorgu yapar */
     let _user = await user.findOne({ $or: [{ phone: body.phone }, { email: body.email }] });
     if (!_user) {
-        return res.error(400, "Böyle bir kullanıcı bulunamadı. Lütfen bilgilerinizi kontrol edin."); // Kullanıcı yoksa hata mesaj döner
+
+        /**  Kullanıcı yoksa hata mesaj döner */
+        return res.error(400, "Böyle bir kullanıcı bulunamadı. Lütfen bilgilerinizi kontrol edin.");
     }
 
     /** Dataları JSON formatına dönüştürür */
     const data_stringify = JSON.stringify({ _id: _user._id, type: forgot_type, expiration: await date.getTimeAdd(config.forgot.expiration_time) });
-    
+
     /** Özel Anahtar Oluşturuluyor */
     const verification_key = CryptoJS.AES.encrypt(data_stringify, config.secretKey);
 
@@ -51,13 +53,14 @@ const route = async (req, res) => {
             })
         } else if (config.forgot.email) {
             code_send = await mail.send({                       // Kullanıcıya mail gönderir
+                name: _user.name,                               // Kullanıcı adı
                 email: _user.email,                             // Kullanıcı eposta adresi
                 subject: 'Şifre Sıfırlama',                     // Mail Başlığı
                 html: await forgat_password_mail_template({     // Mail template
                     code: _user.verification.email_code,        // Doğrulama kodu
                     name: _user.name                            // Kullanıcının tam adı
                 })
-            })
+            });
         }
 
         /** Email veya SMS gönderimi başarılı kontrol eder. */

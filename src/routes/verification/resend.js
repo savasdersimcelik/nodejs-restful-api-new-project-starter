@@ -1,1 +1,0 @@
-/** Doğrulama Kodunu Tekrar Gönder */
