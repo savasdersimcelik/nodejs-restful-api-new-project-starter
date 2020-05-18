@@ -34,7 +34,6 @@ Yeni bir NodeJS RESTful API projesi oluşturmak için geliştirilmiştir.
 - [ ] Giriş yapan kullanıcının FCM ID değerini güncelleme
 - [ ] Kullanıcıya Google Firebase FCM üzerinden bildirim gönderme
 - [ ] Kullanıcı profil bilgilerini düzenleme
-- [ ] Kullanıcı profil resmini değiştirme
 
 # Ayarlar
 
