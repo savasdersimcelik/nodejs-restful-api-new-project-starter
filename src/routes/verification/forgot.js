@@ -23,20 +23,16 @@ const route = async (req, res) => {
         /** Gelen key içerisinde _id var mı kontrol eder. Yoksa Hata mesajı döner */
         return res.error(500, "Bilinmeyen bir hata meydana geldi.");
     }
-
-    if (!decrypt_key.type && (decrypt_key.type == 'email' || decrypt_key.type == 'phone')) {
+    
+    if (decrypt_key.type && decrypt_key.type != 'forgot') {
 
         /** Gelen key içerisinde type var mı kontrol eder. Yoksa Hata mesajı döner */
         return res.error(500, "Bilinmeyen bir hata meydana geldi. Lütfen tekrar deneyin.");
     }
 
-    const code_query = decrypt_key.type == 'phone' ?                        // Doğrulama kodu türü kontrol ediliyor.
-        { 'verification.phone_code': body.code }                            // Doğrulama kodu telefon ise telefon kodu atanıyor.
-        : { 'verification.email_code': body.code }                          // Doğrulama kodu eposta ise eposta kodu atanıyor. 
-
     /** Veritabanında key, _id ve doğrulama kodu eşleşen kişi var mı kontor ediliyor. */
-    let _user = await user.findOne({ 'verification.key': body.key, _id: decrypt_key._id, ...code_query })
-        .select("+verification.phone_expiration").select("+verification.email_expiration");
+    let _user = await user.findOne({ 'verification.key': body.key, _id: decrypt_key._id, 'verification.forgot_code': body.code })
+        .select("+verification.forgot_expiration");
     if (!_user) {
 
         /** Kullanıcı yoksa hata mesaj döner */
@@ -44,14 +40,7 @@ const route = async (req, res) => {
     }
 
     /** type Eposta adresi ise ve doğrulama kodunun son kullanım tarihi geçmiş mi diye kontrol eder */
-    if (decrypt_key.type == 'email' && _user.verification.email_expiration < unix_time) {
-
-        /** Doğrulama kodunun süresi dolmuş ise hata mesajı döner */
-        return res.error(422, "Doğrulama kodunuzun süresi dolmuş. Lütfen tekrar deneyin");
-    }
-
-    /** type Telefon ise ve doğrulama kodunun son kullanım tarihi geçmiş mi diye kontrol eder */
-    if (decrypt_key.type == 'phone' && _user.verification.phone_expiration < unix_time) {
+    if (_user.verification.forgot_expiration < unix_time) {
 
         /** Doğrulama kodunun süresi dolmuş ise hata mesajı döner */
         return res.error(422, "Doğrulama kodunuzun süresi dolmuş. Lütfen tekrar deneyin");

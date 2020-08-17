@@ -27,7 +27,7 @@ const route = async (req, res) => {
 
     /** Veritabanında özel anahtar içerisindeki ID değerine ve Özel Anahtara göre sorgu yapar. */
     let _user = await user.findOne({ _id: decrypt_key._id, 'verification.key': body.key })
-        .select("+verification.email_expiration").select("+verification.phone_expiration");
+        .select("+verification.email_expiration").select("+verification.phone_expiration").select("+verification.forgot_expiration");
     if (!_user) {
 
         /**  Kullanıcı yoksa hata mesaj döner */
@@ -35,7 +35,7 @@ const route = async (req, res) => {
     }
 
     /** Özel anahtar içerisinde ki doğrulama türünü kontrol eder. */
-    if (!decrypt_key.type && (decrypt_key.type == 'email' || decrypt_key.type == 'phone')) {
+    if (!decrypt_key.type && (decrypt_key.type != 'email' || decrypt_key.type != 'phone' || decrypt_key.type != 'forgot')) {
 
         /** Gelen key içerisinde type var mı kontrol eder. Yoksa Hata mesajı döner */
         return res.error(500, "Bilinmeyen bir hata meydana geldi. Lütfen tekrar deneyin.");
@@ -76,6 +76,19 @@ const route = async (req, res) => {
         }
     }
 
+    if (decrypt_key.type == 'forgot') {                          // Doğrulama türünü kontrol eder
+        if (_user.verification.forgot_expiration > unixTime) {   // Son kodun tarihi dolmuş mu kontrol eder.
+            /**  Kullanıcı yoksa hata mesaj döner */
+            return res.error(400, "Henüz doğrulama kodunuzun süresi dolmamış.");
+        }
+
+        data.verification = {
+            key: verification_key,                              // Doğrulama işlemi için özel anahtar
+            forgot_code: await generate_random_code(6, true),    // Telefon için doğrulama kodu üretir
+            forgot_expiration: await date.getTimeAdd(config.verification.expiration_time),   // Doğrulama kodu geçerlilik süresi
+        }
+    }
+
     _user.set(data);
     _user = await _user.save();
 
@@ -98,6 +111,18 @@ const route = async (req, res) => {
                 subject: 'Doğrulama Kodu',                      // Mail Başlığı
                 html: await verification_mail_template({        // Mail template
                     code: _user.verification.email_code,        // Doğrulama kodu
+                    name: _user.name                            // Kullanıcının tam adı
+                })
+            });
+        }
+
+        if (decrypt_key.type == 'forgot') {
+            await mail.send({                                   // Kullanıcıya mail gönderir
+                name: _user.name,                               // Kullanıcı adı
+                email: _user.email,                             // Kullanıcı eposta adresi
+                subject: 'Doğrulama Kodu',                      // Mail Başlığı
+                html: await verification_mail_template({        // Mail template
+                    code: _user.verification.forgot_code,       // Doğrulama kodu
                     name: _user.name                            // Kullanıcının tam adı
                 })
             });

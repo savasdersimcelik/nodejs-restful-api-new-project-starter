@@ -25,8 +25,7 @@ const route = async (req, res) => {
         return res.error(500, "Bilinmeyen bir hata meydana geldi.");
     }
 
-    if (!decrypt_key.type && (decrypt_key.type == 'email' || decrypt_key.type == 'phone')) {
-
+    if (!decrypt_key.type && (decrypt_key.type != 'email' || decrypt_key.type != 'phone')) {
         /** Gelen key içerisinde type var mı kontrol eder. Yoksa Hata mesajı döner */
         return res.error(500, "Bilinmeyen bir hata meydana geldi. Lütfen tekrar deneyin.");
     }

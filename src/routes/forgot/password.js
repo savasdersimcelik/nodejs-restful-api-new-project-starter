@@ -14,7 +14,6 @@ const scheme = joi.object({
 
 const route = async (req, res) => {
     let { body, params, query } = req;
-    const forgot_type = body.email ? "email" : "phone"      // Şifre sıfırlama işlemi türü tanımlanıyor.
 
     /** Gönderilen kullanıcı bilgileri ile ilgili veritabanında sorgu yapar */
     let _user = await user.findOne({ $or: [{ phone: body.phone }, { email: body.email }] });
@@ -25,18 +24,16 @@ const route = async (req, res) => {
     }
 
     /** Dataları JSON formatına dönüştürür */
-    const data_stringify = JSON.stringify({ _id: _user._id, type: forgot_type, expiration: await date.getTimeAdd(config.forgot.expiration_time) });
+    const data_stringify = JSON.stringify({ _id: _user._id, type: "forgot", expiration: await date.getTimeAdd(config.forgot.expiration_time) });
 
     /** Özel Anahtar Oluşturuluyor */
     const verification_key = CryptoJS.AES.encrypt(data_stringify, config.secretKey);
 
     _user.set({                                                 // Kullanıcı yeni datalarını set eder
         verification: {
-            key: verification_key.toString(),                   // Doğrulama kodu için üretilen hash
-            email_code: await generate_random_code(6, true),    // Eposta için doğrulama kodu üretir
-            phone_code: await generate_random_code(6, true),    // Telefon için doğrulama kodu üretir
-            email_expiration: await date.getTimeAdd(config.verification.expiration_time),   // Doğrulama kodu geçerlilik süresi
-            phone_expiration: await date.getTimeAdd(config.verification.expiration_time),   // Doğrulama kodu geçerlilik süresi
+            key: verification_key.toString(),                   // Şifre sıfırlamak için üretilen hash
+            forgot_code: await generate_random_code(6, true),    // Şifre sıfırlamak doğrulama kodu üretir
+            forgot_expiration: await date.getTimeAdd(config.verification.expiration_time),   // Doğrulama kodu geçerlilik süresi
         }
     });
     _user = await _user.save();                                 // Yeni kodları sisteme ekler.
@@ -49,7 +46,7 @@ const route = async (req, res) => {
                 created_by: _user._id,                          // SMS gönderen kullanıcı ID
                 gsmno: _user.phone,                             // SMS gönderilen kullanıcı telefon numarası
                 type: 'forgot_password',                        // SMS Mesaj içeriği türü
-                code: _user.verification.phone_code             // Gönderilen doğrulama kodu
+                code: _user.verification.forgot_code             // Gönderilen doğrulama kodu
             })
         } else if (config.forgot.email) {
             code_send = await mail.send({                       // Kullanıcıya mail gönderir
@@ -57,7 +54,7 @@ const route = async (req, res) => {
                 email: _user.email,                             // Kullanıcı eposta adresi
                 subject: 'Şifre Sıfırlama',                     // Mail Başlığı
                 html: await forgat_password_mail_template({     // Mail template
-                    code: _user.verification.email_code,        // Doğrulama kodu
+                    code: _user.verification.forgot_code,        // Doğrulama kodu
                     name: _user.name                            // Kullanıcının tam adı
                 })
             });

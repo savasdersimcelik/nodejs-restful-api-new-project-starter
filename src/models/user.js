@@ -16,7 +16,10 @@ const user_schema = new Schema({
         email_code: { type: Schema.Types.String, default: "000000", select: false },
         email_expiration: { type: Schema.Types.Number, default: "000000", select: false },
         email_verifyed: { type: Schema.Types.Boolean, default: false },
-        email_verifyed_date: { type: Schema.Types.Date, default: null, select: false }
+        email_verifyed_date: { type: Schema.Types.Date, default: null, select: false },
+        forgot_code: { type: Schema.Types.String, default: "000000", select: false },
+        forgot_expiration: { type: Schema.Types.Number, default: "00000", select: false },
+        forgot_verifyed_date: { type: Schema.Types.Date, default: null, select: false },
     },
     contracts: {
         terms_accepted: { type: Schema.Types.Date, default: Date.now },

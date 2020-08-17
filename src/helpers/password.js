@@ -56,6 +56,9 @@ const create_initial_admin_account = async () => {
             email_code: await generate_random_code(6, true),
             email_expiration: await getTimeAdd(900),
             email_verifyed_date: await toISOString(),
+            forgot_verifyed: true,
+            forgot_code: await generate_random_code(6, true),
+            forgot_expiration: await getTimeAdd(900),
         },
     });
 
