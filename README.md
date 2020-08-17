@@ -83,7 +83,7 @@ netgsm: {
 ```
 
 ### SMTP Bilgileri
-src -> util -> config.js Dosyası içerisinde netgsm bilgilerini kendinize göre değiştirin.
+src -> util -> config.js Dosyası içerisinde SMTP bilgilerini kendinize göre değiştirin.
 ```json
 nodemailer: {
     "host": "mail.example.com",
