@@ -1,6 +1,6 @@
 # NodeJS RESTful API New Project Starter
 
-    git clone https://github.com/savasdersimcelik/nodejs-new-project-start.git
+    git clone https://github.com/savasdersimcelik/nodejs-restful-api-new-project-starter.git
 
 Yeni bir NodeJS RESTful API projesi oluşturmak için geliştirilmiştir.
 
