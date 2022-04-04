@@ -95,37 +95,69 @@ const route = async (req, res) => {
     if (_user) {
 
         if (decrypt_key.type == 'phone') {
-            await netgsm.send({                                 // Kullanıcıya SMS gönderir
-                user: _user._id,                                // SMS gönderilen kullanıcı ID
-                created_by: _user._id,                          // SMS gönderen kullanıcı ID
-                gsmno: _user.phone,                             // SMS gönderilen kullanıcı telefon numarası
-                type: 'verification',                           // SMS Mesaj içeriği türü
-                code: _user.verification.phone_code             // Gönderilen doğrulama kodu
-            });
+            if(config.required.phone){
+                await netgsm.send({                                 // Kullanıcıya SMS gönderir
+                    user: _user._id,                                // SMS gönderilen kullanıcı ID
+                    created_by: _user._id,                          // SMS gönderen kullanıcı ID
+                    gsmno: _user.phone,                             // SMS gönderilen kullanıcı telefon numarası
+                    type: 'verification',                           // SMS Mesaj içeriği türü
+                    code: _user.verification.phone_code             // Gönderilen doğrulama kodu
+                });
+            }else if(config.required.email){
+                await mail.send({                                   // Kullanıcıya mail gönderir
+                    name: _user.name,                               // Kullanıcı adı
+                    email: _user.email,                             // Kullanıcı eposta adresi
+                    subject: 'Doğrulama Kodu',                      // Mail Başlığı
+                    html: await verification_mail_template({        // Mail template
+                        code: _user.verification.email_code,        // Doğrulama kodu
+                        name: _user.name                            // Kullanıcının tam adı
+                    })
+                });
+            }
         }
 
         if (decrypt_key.type == 'email') {
-            await mail.send({                                   // Kullanıcıya mail gönderir
-                name: _user.name,                               // Kullanıcı adı
-                email: _user.email,                             // Kullanıcı eposta adresi
-                subject: 'Doğrulama Kodu',                      // Mail Başlığı
-                html: await verification_mail_template({        // Mail template
-                    code: _user.verification.email_code,        // Doğrulama kodu
-                    name: _user.name                            // Kullanıcının tam adı
-                })
-            });
+            if(config.required.phone){
+                await netgsm.send({                                 // Kullanıcıya SMS gönderir
+                    user: _user._id,                                // SMS gönderilen kullanıcı ID
+                    created_by: _user._id,                          // SMS gönderen kullanıcı ID
+                    gsmno: _user.phone,                             // SMS gönderilen kullanıcı telefon numarası
+                    type: 'verification',                           // SMS Mesaj içeriği türü
+                    code: _user.verification.phone_code             // Gönderilen doğrulama kodu
+                });
+            }else if(config.required.email){
+                await mail.send({                                   // Kullanıcıya mail gönderir
+                    name: _user.name,                               // Kullanıcı adı
+                    email: _user.email,                             // Kullanıcı eposta adresi
+                    subject: 'Doğrulama Kodu',                      // Mail Başlığı
+                    html: await verification_mail_template({        // Mail template
+                        code: _user.verification.email_code,        // Doğrulama kodu
+                        name: _user.name                            // Kullanıcının tam adı
+                    })
+                });
+            }
         }
 
         if (decrypt_key.type == 'forgot') {
-            await mail.send({                                   // Kullanıcıya mail gönderir
-                name: _user.name,                               // Kullanıcı adı
-                email: _user.email,                             // Kullanıcı eposta adresi
-                subject: 'Doğrulama Kodu',                      // Mail Başlığı
-                html: await verification_mail_template({        // Mail template
-                    code: _user.verification.forgot_code,       // Doğrulama kodu
-                    name: _user.name                            // Kullanıcının tam adı
-                })
-            });
+            if(config.required.phone){
+                await netgsm.send({                                 // Kullanıcıya SMS gönderir
+                    user: _user._id,                                // SMS gönderilen kullanıcı ID
+                    created_by: _user._id,                          // SMS gönderen kullanıcı ID
+                    gsmno: _user.phone,                             // SMS gönderilen kullanıcı telefon numarası
+                    type: 'verification',                           // SMS Mesaj içeriği türü
+                    code: _user.verification.phone_code             // Gönderilen doğrulama kodu
+                });
+            }else if(config.required.email){
+                await mail.send({                                   // Kullanıcıya mail gönderir
+                    name: _user.name,                               // Kullanıcı adı
+                    email: _user.email,                             // Kullanıcı eposta adresi
+                    subject: 'Doğrulama Kodu',                      // Mail Başlığı
+                    html: await verification_mail_template({        // Mail template
+                        code: _user.verification.forgot_code,       // Doğrulama kodu
+                        name: _user.name                            // Kullanıcının tam adı
+                    })
+                });
+            }
         }
 
         /** Doğrulama kodu tekrar gönderildi. */
