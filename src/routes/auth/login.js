@@ -12,13 +12,14 @@ const scheme = joi.object({
     email: joi.string().email().label('Email'),                                         // Kullanıcı eposta adresi
     phone: joi.string().label('Telefon'),                                               // Kullanıcı Telefon Numarası
     password: joi.string().min(6).max(20).required().label('Şifre'),                    // Kullanıcı Şifre
+    type: joi.string().empty("").label('Üyelik Türü').default("user")                   // Kullanıcı Üyelik Türü
 }).options({ stripUnknown: true }).xor('email', 'phone').error(joi_error_message);      // Joi Ayarlar
 
 const route = async (req, res) => {
     let { body, params, query } = req;
 
     /** Kullanıcı eposta adresi veya telefon numarasına göre veritabanına göre sorgu */
-    let _user = await user.findOne({ $or: [{ phone: body.phone }, { email: body.email }], is_delete: false }).select("+password");
+    let _user = await user.findOne({ $or: [{ phone: body.phone }, { email: body.email }], is_delete: false, type: body.type }).select("+password");
     if (!_user) {
         return res.error(400, "Lütfen giriş bilgilerinizi kontrol edin."); // Kullanıcı yoksa hata mesaj döner
     }
