@@ -2,9 +2,9 @@ const { model, Schema } = require("mongoose");
 const { config } = require('../util');
 
 const user_schema = new Schema({
-    name: { type: Schema.Types.String, required: true },
-    first_name: { type: Schema.Types.String, required: true },
-    last_name: { type: Schema.Types.String, required: true },
+    name: { type: Schema.Types.String, required: false, default: "İsim Bilirtilmemiş" },
+    first_name: { type: Schema.Types.String, required: false, default: "İsimsiz" },
+    last_name: { type: Schema.Types.String, required: false, default: "Soyisimsiz" },
     email: { type: Schema.Types.String, required: config.required.email, default: null, unique: config.required.email },
     phone: { type: Schema.Types.String, required: config.required.phone, default: null, unique: config.required.phone },
     password: { type: Schema.Types.String, required: true, select: false },
