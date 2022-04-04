@@ -30,9 +30,9 @@ const route = async (req, res) => {
         }
     }
 
-    if (config.required.phone) {
+    if (config.required.email) {
         if(!body?.email){
-            return res.error(400, "Lütfen telefon numarası giriniz.");
+            return res.error(400, "Lütfen eposta adresinizi giriniz.");
         }
 
         /** Gelen eposta adresi veritabanında kontrol ediliyor. */
