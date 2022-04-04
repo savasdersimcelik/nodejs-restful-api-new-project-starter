@@ -9,6 +9,7 @@ Yeni bir NodeJS RESTful API projesi oluşturmak için geliştirilmiştir.
 - [x] Kullanıcı kayıt sistemi
     - [x] Eposta kullanılıyor mu diye kontrol ediliyor.
     - [x] Telefon numarası kullanılıyor mu diye kontrol ediliyor.
+    - [x] Zorunlu alanların config dosyasından yönetilebilir hale getirildi
 - [x] Kayıt sonrası doğrulama kodunu SMS olarak gönderme
     - [x] Eposta, Telefon veya Her ikisi aynı anda gönderilebilir. ( Config dosyasından ayarlanabilir. )
     - [x] Kodların son kullanma tarihleri sisteme ekleniyor.    ( Son kullanım süresi Config dosyasından ayarlanabilir )

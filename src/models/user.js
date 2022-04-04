@@ -1,11 +1,12 @@
 const { model, Schema } = require("mongoose");
+const { config } = require('../util');
 
 const user_schema = new Schema({
     name: { type: Schema.Types.String, required: true },
     first_name: { type: Schema.Types.String, required: true },
     last_name: { type: Schema.Types.String, required: true },
-    email: { type: Schema.Types.String, required: true, unique: true },
-    phone: { type: Schema.Types.String, required: true, unique: true },
+    email: { type: Schema.Types.String, required: config.required.email, default: null, unique: config.required.email },
+    phone: { type: Schema.Types.String, required: config.required.phone, default: null, unique: config.required.phone },
     password: { type: Schema.Types.String, required: true, select: false },
     verification: {
         key: { type: Schema.Types.String, default: "", select: false },
@@ -26,7 +27,7 @@ const user_schema = new Schema({
         privacy_accepted: { type: Schema.Types.Date, default: Date.now },
         cookies_accepted: { type: Schema.Types.Date, default: Date.now }
     },
-    type: { type: Schema.Types.String, enum: ["admin", "user"], default: "user" },
+    type: { type: Schema.Types.String, enum: ["admin", "partner", "user"], default: "user" },
     fcm_token: { type: Schema.Types.String, default: "", select: false },
     is_active: { type: Schema.Types.Boolean, default: false },
     is_delete: { type: Schema.Types.Boolean, default: false },

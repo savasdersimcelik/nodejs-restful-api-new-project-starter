@@ -16,6 +16,10 @@ module.exports = {
         phone: "05001234567",           // Root yönetici telefon numarası
         password: "7BJXH6HjE8",         // Root Yönetici Şifresi
     },
+    required: {
+        phone: true,                     // Telefon zorunlu alan mı ?
+        email: false                     // Email zorunlu alan mı ?
+    },
     verification: {
         required: true,                 // Doğrulama işlemi yapılmadan giriş yapılabilsin mi ?
         expiration_time: 120,           // Doğrulama kodu son kullanım süresi saniye cinsinden

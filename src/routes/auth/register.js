@@ -8,32 +8,36 @@ const CryptoJS = require("crypto-js");
  * Yeni kayıt olacak kullanıcılar için post ile gönderilecek data şeması
  */
 const scheme = joi.object({
-    first_name: joi.string().required().label('İsim'),                      // Kullanıcı adı
-    last_name: joi.string().required().label('Soyisim'),                    // Kullanıcı soyadı
-    email: joi.string().email().required().label('Eposta Adresi'),          // Kullanıcı eposta adresi
-    phone: joi.string().length(11).required().label('Telefon Numarası'),    // Kullanıcı telefon numarası
-    password: joi.string().min(6).max(25).required().label('Şifre')         // Kullanıcı Şifresi
-}).options({ stripUnknown: true }).error(joi_error_message);                // Joi Ayarlar
+    first_name: joi.string().label('İsim').default("İsimsiz"),                          // Kullanıcı adı
+    last_name: joi.string().label('Soyisim').default("Soyisimsiz"),                     // Kullanıcı soyadı
+    email: joi.string().email().label('Eposta Adresi'),                                 // Kullanıcı eposta adresi
+    phone: joi.string().length(11).label('Telefon Numarası'),                           // Kullanıcı telefon numarası
+    password: joi.string().min(6).max(25).required().label('Şifre'),                    // Kullanıcı Şifresi
+    type: joi.string().min(6).max(25).required().label('Üyelik Türü').default("user")   // Kullanıcı Üyelik Türü
+}).options({ stripUnknown: true }).error(joi_error_message);                            // Joi Ayarlar
 
 const route = async (req, res) => {
     let { body, params, query } = req;
 
-    /** Gelen telefon numarası veritabanında kontrol ediliyor. */
-    const phone_control = await user.findOne({ phone: body.phone, is_delete: false });
-    if (phone_control) {
-        return res.error(400, "Bu telefon numarası ile kayıtlı bir kullanıcı bulunmakta.");
+    if (config.required.phone) {
+        /** Gelen telefon numarası veritabanında kontrol ediliyor. */
+        const phone_control = await user.findOne({ phone: body.phone, is_delete: false });
+        if (phone_control) {
+            return res.error(400, "Bu telefon numarası ile kayıtlı bir kullanıcı bulunmakta.");
+        }
     }
 
-    /** Gelen eposta adresi veritabanında kontrol ediliyor. */
-    const email_control = await user.findOne({ email: body.email, is_delete: false });
-    if (email_control) {
-        return res.error(400, "Bu eposta adresi ile kayıtlı bir kullanıcı bulunmakta.");
+    if (config.required.phone) {
+        /** Gelen eposta adresi veritabanında kontrol ediliyor. */
+        const email_control = await user.findOne({ email: body.email, is_delete: false });
+        if (email_control) {
+            return res.error(400, "Bu eposta adresi ile kayıtlı bir kullanıcı bulunmakta.");
+        }
     }
-    
+
     body.password = await hash_password(body.password);                                         // Kullanıcı şifresi hashleniyor.
     body.name = body.first_name + ' ' + body.last_name;                                         // Kullanıcı adı ve soyadı birleştiriliyor.
     body.is_active = config.verification.phone || config.verification.email ? false : true,     // Herhangi bir doğrulama sistemi aktif ise hesap aktif false olur
-
         body.verification = {
             phone_verifyed: config.verification.phone ? false : true,                           // Eğer doğrulama sistemini kontrol eder.
             email_verifyed_date: config.verification.phone ? null : await date.toISOString(),   // Doğrulama sistemi false ise tarih oluşturur
@@ -81,7 +85,7 @@ const route = async (req, res) => {
 
             /** Doğrulama işlemi için özel anahtar oluşturur */
             const data_stringify = JSON.stringify({ _id: _user._id, type: verif_type, expiration: await date.getTimeAdd(config.verification.expiration_time) });
-            
+
             /** Özel anahtarı oluşturuluyor. */
             const verification_key = CryptoJS.AES.encrypt(data_stringify, config.secretKey);
 
