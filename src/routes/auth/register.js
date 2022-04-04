@@ -8,18 +8,21 @@ const CryptoJS = require("crypto-js");
  * Yeni kayıt olacak kullanıcılar için post ile gönderilecek data şeması
  */
 const scheme = joi.object({
-    first_name: joi.string().label('İsim').default("İsimsiz"),                          // Kullanıcı adı
-    last_name: joi.string().label('Soyisim').default("Soyisimsiz"),                     // Kullanıcı soyadı
-    email: joi.string().email().label('Eposta Adresi'),                                 // Kullanıcı eposta adresi
-    phone: joi.string().length(11).label('Telefon Numarası'),                           // Kullanıcı telefon numarası
-    password: joi.string().min(6).max(25).required().label('Şifre'),                    // Kullanıcı Şifresi
-    type: joi.string().min(6).max(25).required().label('Üyelik Türü').default("user")   // Kullanıcı Üyelik Türü
-}).options({ stripUnknown: true }).error(joi_error_message);                            // Joi Ayarlar
+    first_name: joi.string().empty("").label('İsim').default("İsim"),                          // Kullanıcı adı
+    last_name: joi.string().empty("").label('Soyisim').default("Soyisim"),                     // Kullanıcı soyadı
+    email: joi.string().empty("").email().label('Eposta Adresi'),                                 // Kullanıcı eposta adresi
+    phone: joi.string().empty("").length(11).label('Telefon Numarası'),                           // Kullanıcı telefon numarası
+    password: joi.string().min(6).max(25).required().label('Şifre'),                            // Kullanıcı Şifresi
+    type: joi.string().empty("").label('Üyelik Türü').default("user")                             // Kullanıcı Üyelik Türü
+}).options({ stripUnknown: true }).error(joi_error_message);                                    // Joi Ayarlar
 
 const route = async (req, res) => {
     let { body, params, query } = req;
-
     if (config.required.phone) {
+        if(!body?.phone){
+            return res.error(400, "Lütfen telefon numarası giriniz.");
+        }
+
         /** Gelen telefon numarası veritabanında kontrol ediliyor. */
         const phone_control = await user.findOne({ phone: body.phone, is_delete: false });
         if (phone_control) {
@@ -28,6 +31,10 @@ const route = async (req, res) => {
     }
 
     if (config.required.phone) {
+        if(!body?.email){
+            return res.error(400, "Lütfen telefon numarası giriniz.");
+        }
+
         /** Gelen eposta adresi veritabanında kontrol ediliyor. */
         const email_control = await user.findOne({ email: body.email, is_delete: false });
         if (email_control) {
