@@ -115,20 +115,5 @@ exports.send = async (param) => {
  * @param {Object} param: Mesaj içeriği üretilirken kullanılacak parametreler
  */
 const message_content = async (param) => {
-    switch (param.type) {
-        case 'register':
-            return config.projectName + ' Kayıt olduğunuz için teşekkürler. Doğrulama kodunuz: ' + param.code;
-            break;
-        case 'resend':
-            return config.projectName + ' Telefon numaranızı doğrulamak için kodunuz: ' + param.code;
-            break;
-        case 'forgot_password':
-            return config.projectName + ' Şifre sıfırlamak için doğrulama kodunuz: ' + param.code;
-            break;
-        case 'verification':
-            return config.projectName + ' Telefon numaranızı doğrulamak için kodunuz: ' + param.code;
-            break;
-        default:
-            return param.message;
-    }
+    return 'Kodunuz: ' + param.code + ' Doğrulama kodunuz kısa bir süre geçerlidir. Lüften kodunuzu kimse ile paylaşmayın. ' + config.projectName + ' bizi tercih ettiğiniz için teşekkür ederiz.';
 }

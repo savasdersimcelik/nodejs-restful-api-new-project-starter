@@ -26,7 +26,7 @@ const route = async (req, res) => {
         /** Gelen telefon numarası veritabanında kontrol ediliyor. */
         const phone_control = await user.findOne({ phone: body.phone, is_delete: false });
         if (phone_control) {
-            return res.error(400, "Bu telefon numarası ile kayıtlı bir kullanıcı bulunmakta.");
+            return res.error(400, "Bu telefon numarası kullanılıyor.");
         }
     }
 
@@ -38,7 +38,7 @@ const route = async (req, res) => {
         /** Gelen eposta adresi veritabanında kontrol ediliyor. */
         const email_control = await user.findOne({ email: body.email, is_delete: false });
         if (email_control) {
-            return res.error(400, "Bu eposta adresi ile kayıtlı bir kullanıcı bulunmakta.");
+            return res.error(400, "Bu eposta adresi kullanılıyor.");
         }
     }
 

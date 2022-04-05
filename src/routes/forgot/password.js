@@ -15,10 +15,18 @@ const scheme = joi.object({
 const route = async (req, res) => {
     let { body, params, query } = req;
 
-    /** Gönderilen kullanıcı bilgileri ile ilgili veritabanında sorgu yapar */
-    let _user = await user.findOne({ $or: [{ phone: body.phone }, { email: body.email }] });
-    if (!_user) {
+    var _user = null;
+    if(body?.phone){
+        /** Gönderilen kullanıcı bilgileri ile ilgili veritabanında sorgu yapar */
+        _user = await user.findOne({ phone: body.phone });
+    }
 
+    if(!_user && body?.email){
+        /** Gönderilen kullanıcı bilgileri ile ilgili veritabanında sorgu yapar */
+        _user = await user.findOne({ email: body.email });
+    }
+
+    if (!_user) {
         /**  Kullanıcı yoksa hata mesaj döner */
         return res.error(400, "Böyle bir kullanıcı bulunamadı. Lütfen bilgilerinizi kontrol edin.");
     }

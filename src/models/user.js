@@ -27,7 +27,7 @@ const user_schema = new Schema({
         privacy_accepted: { type: Schema.Types.Date, default: Date.now },
         cookies_accepted: { type: Schema.Types.Date, default: Date.now }
     },
-    type: { type: Schema.Types.String, enum: ["admin", "partner", "user"], default: "user" },
+    type: { type: Schema.Types.String, enum: ["admin", "user"], default: "user" },
     fcm_token: { type: Schema.Types.String, default: "", select: false },
     is_active: { type: Schema.Types.Boolean, default: false },
     is_delete: { type: Schema.Types.Boolean, default: false },

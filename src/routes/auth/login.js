@@ -18,10 +18,20 @@ const scheme = joi.object({
 const route = async (req, res) => {
     let { body, params, query } = req;
 
-    /** Kullanıcı eposta adresi veya telefon numarasına göre veritabanına göre sorgu */
-    let _user = await user.findOne({ $or: [{ phone: body.phone }, { email: body.email }], is_delete: false, type: body.type }).select("+password");
+    var _user = null;
+    if (body?.phone) {
+        /** Gönderilen kullanıcı bilgileri ile ilgili veritabanında sorgu yapar */
+        _user = await user.findOne({ phone: body.phone, is_delete: false, type: body.type }).select("+password");;
+    }
+
+    if (!_user && body?.email) {
+        /** Gönderilen kullanıcı bilgileri ile ilgili veritabanında sorgu yapar */
+        _user = await user.findOne({ email: body.email, is_delete: false, type: body.type }).select("+password");;
+    }
+
     if (!_user) {
-        return res.error(400, "Lütfen giriş bilgilerinizi kontrol edin."); // Kullanıcı yoksa hata mesaj döner
+        /**  Kullanıcı yoksa hata mesaj döner */
+        return res.error(400, "Böyle bir kullanıcı bulunamadı. Lütfen bilgilerinizi kontrol edin.");
     }
 
     /** Sadece doğrulama işlemini tamamlamış kişiler mi giriş yapabilir kontrol ediyor. */

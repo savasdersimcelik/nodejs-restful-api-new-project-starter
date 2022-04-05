@@ -15,8 +15,14 @@ const route = async (req, res) => {
     let { query, body, params } = req;
 
     const unix_time = await date.unixTime();                                // Unix Time
-    const bytes = CryptoJS.AES.decrypt(body.key, config.secretKey);         // Kullanıcıdan gelen KEY çözümlüyor.
-    const decrypt_key = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));      // Çöüzmlenen değer UTF-8 olarak string hale getiriliyor
+    
+    var decrypt_key = null;
+    try {
+        const bytes = CryptoJS.AES.decrypt(body.key, config.secretKey);         // Kullanıcıdan gelen KEY çözümlüyor.
+        decrypt_key = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));      // Çöüzmlenen değer UTF-8 olarak string hale getiriliyor
+    } catch (error) {
+        return res.error(500, "Bilinmeyen bir hata meydana geldi.");
+    }
 
     if (!decrypt_key._id) {
 
