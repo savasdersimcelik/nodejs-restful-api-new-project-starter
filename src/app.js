@@ -1,8 +1,12 @@
 const express = require('express');
 const app = express();
+
+const server = require("http").createServer(app);
+
 const body_parser = require('body-parser');
 const cors = require('cors');
 const router = require('./routes');
+
 const { respond, respondWithError, config } = require('./util');
 const { create_response_middleware, jwt_decoder, client } = require('./middlewares');
 const { create_initial_admin_account } = require('./helpers');
@@ -21,7 +25,8 @@ app.use(response);
 app.use(jwt_decoder);
 app.use(client);
 app.use(router);
-app.listen(port);
+server.listen(port);
+
 create_initial_admin_account();
 
 module.exports = app;
