@@ -12,7 +12,6 @@ const scheme = joi.object({
     email: joi.string().email().label('Email'),                                         // Kullanıcı eposta adresi
     phone: joi.string().label('Telefon'),                                               // Kullanıcı Telefon Numarası
     password: joi.string().min(6).max(20).required().label('Şifre'),                    // Kullanıcı Şifre
-    type: joi.string().empty("").label('Üyelik Türü').default("user")                   // Kullanıcı Üyelik Türü
 }).options({ stripUnknown: true }).xor('email', 'phone').error(joi_error_message);      // Joi Ayarlar
 
 const route = async (req, res) => {
@@ -21,12 +20,12 @@ const route = async (req, res) => {
     var _user = null;
     if (body?.phone) {
         /** Gönderilen kullanıcı bilgileri ile ilgili veritabanında sorgu yapar */
-        _user = await user.findOne({ phone: body.phone, is_delete: false, type: body.type }).select("+password");;
+        _user = await user.findOne({ phone: body.phone, is_delete: false}).select("+password");;
     }
 
     if (!_user && body?.email) {
         /** Gönderilen kullanıcı bilgileri ile ilgili veritabanında sorgu yapar */
-        _user = await user.findOne({ email: body.email, is_delete: false, type: body.type }).select("+password");;
+        _user = await user.findOne({ email: body.email, is_delete: false}).select("+password");;
     }
 
     if (!_user) {
