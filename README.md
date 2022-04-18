@@ -67,7 +67,7 @@ initialAdminAccount: {
 }
 ```
 
-### User Kayıt Zorunlu Alanlar
+### Varsayılan Dil Ayarı
 src -> util -> config.js Dosyası içerisinde bilgileri ( Aşağıda yer alan bilgiler ) kendinize göre değiştirin.
 ```json
      defaultLang: "tr",
