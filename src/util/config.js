@@ -2,12 +2,13 @@ const Path = require('path');
 
 module.exports = {
     projectName: "Nodejs Yeni Proje",   // Projenin Adı
-    mongoConnectionString: "mongodb://localhost:27017/node-new-project-start",  // MongoDB bağlantı adresi
+    mongoConnectionString: "mongodb://85.117.239.232:27017/starter",  // MongoDB bağlantı adresi
     secretKey: "&JxJf?nGatkj#cXApma8jf3U7evuXwd2",  // Hash sistemi için güvenlik anahtarı
     jwt_expiration: 0,                  // JWT Token kullanım süresi saniye cinsinden ( İptal etmek için: 0)
     pagination: 10,                     // Search sisteminde listenecek içerisik sayısı
-    base_url: "http://localhost:3000/", // Serverın çalıştığı domain veya ip adresi
+    base_url: "http://192.168.1.4:3000/", // Serverın çalıştığı domain veya ip adresi
     PORT: 3000,                         // Serverın çalıştığı port numarası
+    defaultLang: "tr",                  // Sistemde ki varsayılan dil
     initialAdminAccount: {
         first_name: "Savaş Dersim",     // Root yönetici adı
         last_name: "Çelik",             // Root yönetici soyadı

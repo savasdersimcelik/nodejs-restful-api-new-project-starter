@@ -22,7 +22,7 @@ const route = async (req, res) => {
     if (!decrypt_key._id) {
 
         /** Gelen key içerisinde type var mı kontrol eder. Yoksa Hata mesajı döner */
-        return res.error(500, "Bilinmeyen bir hata meydana geldi. Lütfen tekrar deneyin.");
+        return res.error("unknown_error");
     }
 
     /** Veritabanında özel anahtar içerisindeki ID değerine ve Özel Anahtara göre sorgu yapar. */
@@ -31,14 +31,14 @@ const route = async (req, res) => {
     if (!_user) {
 
         /**  Kullanıcı yoksa hata mesaj döner */
-        return res.error(400, "Böyle bir kullanıcı bulunamadı. Lütfen bilgilerinizi kontrol edin.");
+        return res.error("not_found_user");
     }
 
     /** Özel anahtar içerisinde ki doğrulama türünü kontrol eder. */
     if (!decrypt_key.type && (decrypt_key.type != 'email' || decrypt_key.type != 'phone' || decrypt_key.type != 'forgot')) {
 
         /** Gelen key içerisinde type var mı kontrol eder. Yoksa Hata mesajı döner */
-        return res.error(500, "Bilinmeyen bir hata meydana geldi. Lütfen tekrar deneyin.");
+        return res.error("unknown_error");
     }
 
     /** Dataları JSON formatına dönüştürür */
@@ -52,7 +52,7 @@ const route = async (req, res) => {
         if (_user.verification.email_expiration > unixTime) {   // Son kodun tarihi dolmuş mu kontrol eder.
 
             /**  Kullanıcı yoksa hata mesaj döner */
-            return res.error(400, "Henüz doğrulama kodunuzun süresi dolmamış.");
+            return res.error("not_expired_verification_code");
         }
 
         data.verification = {
@@ -66,7 +66,7 @@ const route = async (req, res) => {
         if (_user.verification.phone_expiration > unixTime) {   // Son kodun tarihi dolmuş mu kontrol eder.
 
             /**  Kullanıcı yoksa hata mesaj döner */
-            return res.error(400, "Henüz doğrulama kodunuzun süresi dolmamış.");
+            return res.error("not_expired_verification_code");
         }
 
         data.verification = {
@@ -78,8 +78,9 @@ const route = async (req, res) => {
 
     if (decrypt_key.type == 'forgot') {                          // Doğrulama türünü kontrol eder
         if (_user.verification.forgot_expiration > unixTime) {   // Son kodun tarihi dolmuş mu kontrol eder.
+            
             /**  Kullanıcı yoksa hata mesaj döner */
-            return res.error(400, "Henüz doğrulama kodunuzun süresi dolmamış.");
+            return res.error("not_expired_verification_code");
         }
 
         data.verification = {
@@ -161,11 +162,11 @@ const route = async (req, res) => {
         }
 
         /** Doğrulama kodu tekrar gönderildi. */
-        return res.respond({ key: _user.verification.key }, "Doğrulama kodunuz tekrar gönderildi.");
+        return res.respond({ key: _user.verification.key }, "verification_code_send");
     }
 
     /** Kayıt işlemi gerçekleşmezse hata mesajı döner. */
-    return res.error(500, "Bir hata meydana geldi. Lütfen tekrar deneyin");
+    return res.error("unknown_error");
 
 }
 

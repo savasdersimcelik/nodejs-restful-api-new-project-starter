@@ -1,0 +1,557 @@
+{
+	"info": {
+		"_postman_id": "83ecc91e-863f-44b6-8114-93598f865ce0",
+		"name": "Starter",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"first_name\": \"Ahmet\",\r\n    \"last_name\": \"Çilingir\",\r\n    \"phone\": \"05301577729\",\r\n    \"password\": \"123456\",\r\n    \"type\": \"partner\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auth/register",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone\": \"05001234567\",\r\n    \"password\": \"7BJXH6HjE8\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auth/login",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Verification",
+			"item": [
+				{
+					"name": "Account",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"key\": \"U2FsdGVkX19m8thVrAG8dDkuJrwnt1EoVBdXSoikyTAQRrmFk3LAU+nq6GUzvCSXsiF7R4SZYy9Gjt/PzLooK1nqG77r9mKwgiDDmGGfMJJBc+46D52s/I3y1tes099p\",\r\n    \"code\": \"655955\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/verification/account",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"verification",
+								"account"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"key\": \"U2FsdGVkX18osjGC9IDb/9WfKrTIv30Nx5ldrN3lFoWsFkvrsTpXuXLmrMXmEXbZQcnxCV0GTR5H4hq1W129yG28rvx+HW2ssFQjDErc5zn87hpEHMnIWkvgYMTz6CFm\",\r\n    \"code\": \"412346\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/verification/forgot",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"verification",
+								"forgot"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Forgot",
+			"item": [
+				{
+					"name": "Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone\": \"05301577729\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/forgot/password",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"forgot",
+								"password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"key\": \"U2FsdGVkX1/sY3ZP8PDQQDlyNqcXd9RgrL5CUvK6veUKhyEQBapzIEfFS7qygg8OppfIJOryC3N4783EoAYERwOvhUl9PZ9RwAR4/Mf95voDZND3h/Bx7ZCOZz0v2DiA\",\r\n    \"password\": \"123456\",\r\n    \"password_again\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/forgot/password/change",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"forgot",
+								"password",
+								"change"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Send",
+			"item": [
+				{
+					"name": "Code",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"key\": \"U2FsdGVkX1+MMYA0hU22rSA5+mp59GFBFyQ74Eyfia68roHfjDR9tr2Pjo0HeJvnCnJLJsQB60d1qtPN5Vz9o8u3dAupCNsspuuQZLm761Es6q9ve3Vzi+n5dv2PRbB/\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/send/code",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"send",
+								"code"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Country",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Türkiye\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/country/create",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"country",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/country/info?_id=624fffc1efcaeb5d787a86eb",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"country",
+								"info"
+							],
+							"query": [
+								{
+									"key": "_id",
+									"value": "624fffc1efcaeb5d787a86eb"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/country/list",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"country",
+								"list"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "City",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"İstanbul\",\r\n    \"country\": \"625dce3ff5f92112f0e635f4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/city/create",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"city",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/city/info?_id=625dce47f5f92112f0e635f7",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"city",
+								"info"
+							],
+							"query": [
+								{
+									"key": "_id",
+									"value": "625dce47f5f92112f0e635f7"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/city/list",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"city",
+								"list"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "District",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Kartal\",\r\n    \"city\": \"625dce47f5f92112f0e635f7\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/district/create",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"district",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/district/info?_id=624fffc1efcaeb5d787a86eb",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"district",
+								"info"
+							],
+							"query": [
+								{
+									"key": "_id",
+									"value": "624fffc1efcaeb5d787a86eb"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/district/list?city=6251d6836ebeb509b44e1c31",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"district",
+								"list"
+							],
+							"query": [
+								{
+									"key": "city",
+									"value": "6251d6836ebeb509b44e1c31"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Worker",
+			"item": [
+				{
+					"name": "Info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/worker/info",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"worker",
+								"info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Status",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/worker/service-change",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"worker",
+								"service-change"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/user/info",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"user",
+								"info"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjVkNDZlMWNkOWFiYzIxMTRmZDlmNjYiLCJ0eXBlIjoiYWRtaW4iLCJpYXQiOjE2NTAzMTQ2MjZ9.T71ug0RfnU40taOSwE6RKK9OH2o9OKdlVnWUq2ONWVY",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://192.168.1.4:3000/api",
+			"type": "string"
+		}
+	]
+}

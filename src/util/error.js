@@ -1,4 +1,4 @@
-
+const fs = require('fs')
 
 // Console Log
 const Debug = (...params) => {

@@ -22,18 +22,18 @@ const route = async (req, res) => {
         const bytes = CryptoJS.AES.decrypt(body.key, config.secretKey);         // Kullanıcıdan gelen KEY çözümlüyor.
         decrypt_key = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));      // Çöüzmlenen değer UTF-8 olarak string hale getiriliyor
     } catch (error) {
-        return res.error(500, "Bilinmeyen bir hata meydana geldi.");
+        return res.error("unknown_error");
     }
 
     if (!decrypt_key._id) {
 
         /** Gelen key içerisinde _id var mı kontrol eder. Yoksa Hata mesajı döner */
-        return res.error(500, "Bilinmeyen bir hata meydana geldi.");
+        return res.error("unknown_error");
     }
 
     if (!decrypt_key.type && (decrypt_key.type != 'email' || decrypt_key.type != 'phone')) {
         /** Gelen key içerisinde type var mı kontrol eder. Yoksa Hata mesajı döner */
-        return res.error(500, "Bilinmeyen bir hata meydana geldi. Lütfen tekrar deneyin.");
+        return res.error("unknown_error");
     }
 
     const code_query = decrypt_key.type == 'phone' ?                        // Doğrulama kodu türü kontrol ediliyor.
@@ -46,21 +46,21 @@ const route = async (req, res) => {
     if (!_user) {
 
         /** Kullanıcı yoksa hata mesaj döner */
-        return res.error(422, "Geçersiz bir kod gönderdiniz. Lütfen tekrar deneyin.");
+        return res.error("invalid_verification_code");
     }
 
     /** type Eposta adresi ise ve doğrulama kodunun son kullanım tarihi geçmiş mi diye kontrol eder */
     if (decrypt_key.type == 'email' && _user.verification.email_expiration < unix_time) {
 
         /** Doğrulama kodunun süresi dolmuş ise hata mesajı döner */
-        return res.error(422, "Doğrulama kodunuzun süresi dolmuş. Lütfen tekrar deneyin");
+        return res.error("expired_verification_code");
     }
 
     /** type Telefon ise ve doğrulama kodunun son kullanım tarihi geçmiş mi diye kontrol eder */
     if (decrypt_key.type == 'phone' && _user.verification.phone_expiration < unix_time) {
 
         /** Doğrulama kodunun süresi dolmuş ise hata mesajı döner */
-        return res.error(422, "Doğrulama kodunuzun süresi dolmuş. Lütfen tekrar deneyin");
+        return res.error("expired_verification_code");
     }
 
     verify_type = decrypt_key.type == 'phone' ? 'email' : 'phone';
@@ -96,7 +96,7 @@ const route = async (req, res) => {
     } else {
 
         /** Doğrulama kodunun süresi dolmuş ise hata mesajı döner */
-        return res.error(422, "Bilinmeyen bir hata meydana geldi. Lütfen tekrar deneyin.");
+        return res.error("unknown_error");
     }
 
     _user.set(data);
@@ -115,7 +115,7 @@ const route = async (req, res) => {
         });
 
         /** Doğrulama kodu değiştirilirse başarılı response döner */
-        return res.respond({ key: _user.verification.key }, "Eposta adresinizi doğrulamanız gerekmektedir.");
+        return res.respond({ key: _user.verification.key }, "email_verification");
     }
 
     if (config.verification.required && config.verification.phone && !_user.verification.phone_verifyed) {
@@ -129,11 +129,11 @@ const route = async (req, res) => {
         });
 
         /** Doğrulama kodu değiştirilirse başarılı response döner */
-        return res.respond({ key: _user.verification.key }, "Telefon numaranızı doğrulamanız gerekmektedir.");
+        return res.respond({ key: _user.verification.key }, "phone_verification");
     }
 
     /** Doğrulama kodu değiştirilirse başarılı response döner */
-    return res.respond({}, "Doğrulama işlemleri tamamlandı artık giriş yapabilirsiniz.");
+    return res.respond({}, "verification");
 
 }
 

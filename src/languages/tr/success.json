@@ -1,0 +1,58 @@
+{
+    "register": {
+        "key": "register",
+        "code": 2000,
+        "message": "Kayıt işlemi başarılı bir şekilde gerçekleşti. Artık giriş yapabilirsiniz."
+    },
+    "register_verification": {
+        "key": "register_verification",
+        "code": 2001,
+        "message": "Kayıt işlemi başarılı bir şekilde gerçekleşti. Artık hesabınızı doğrulayabilirsiniz."
+    },
+    "login": {
+        "key": "login",
+        "code": 2002,
+        "message": "Giriş işlemi başarılı."
+    },
+    "email_verification": {
+        "key": "email_verification",
+        "code": 2003,
+        "message": "Eposta adresinizi doğrulamanız gerekmektedir."
+    },
+    "phone_verification": {
+        "key": "phone_verification",
+        "code": 2004,
+        "message": "Telefon numaranızı doğrulamanız gerekmektedir."
+    },
+    "verification": {
+        "key": "verification",
+        "code": 2005,
+        "message": "Doğrulama işlemleri tamamlandı artık giriş yapabilirsiniz."
+    },
+    "now_change_password": {
+        "key": "now_change_password",
+        "code": 2006,
+        "message": "Artık şifrenizi değiştirebilirsiniz."
+    },
+    "create": {
+        "key": "create",
+        "code": 2007,
+        "message": "Ekleme işlemi başarılı bir şekilde tamamlandı"
+    },
+    "update": {
+        "key": "update",
+        "code": 2008,
+        "message": "Güncelleme işlemi başarılı bir şekilde tamamlandı"
+    },
+    "password_change": {
+        "key": "password_change",
+        "code": 2008,
+        "message": "Şifreniz başarılı bir şekilde değiştirildi."
+    },
+    "verification_code_send": {
+        "key": "verification_code_send",
+        "code": 2008,
+        "message": "Doğrulama kodu gönderildi."
+    }
+
+}

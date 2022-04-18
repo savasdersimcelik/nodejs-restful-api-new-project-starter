@@ -1,0 +1,82 @@
+{
+    "not_found_user": {
+        "key": "not_found_user",
+        "code": 1000,
+        "message": "Böyle bir kullanıcı bulunamadı. Lütfen bilgilerinizi kontrol edin."
+    },
+    "not_verification_phone": {
+        "key": "not_verification_phone",
+        "code": 1001,
+        "message": "Telefon numaranızı doğrulamanız gerekmektedir. Doğrulama kodu gönderildi."
+    },
+    "not_verification_email": {
+        "key": "not_verification_email",
+        "code": 1002,
+        "message": "Eposta adresinizi doğrulamanız gerekmektedir. Doğrulama maili gönderildi."
+    },
+    "failed_login_information": {
+        "key": "failed_login_information",
+        "code": 1003,
+        "message": "Lütfen giriş bilgilerinizi kontrol ediniz."
+    },
+    "require_phone": {
+        "key": "require_phone",
+        "code": 1004,
+        "message": "Lütfen telefon numarası giriniz."
+    },
+    "phone_used": {
+        "key": "phone_used",
+        "code": 1005,
+        "message": "Bu telefon numarası kullanılıyor."
+    },
+    "require_email": {
+        "key": "require_email",
+        "code": 1006,
+        "message": "Lütfen eposta adresinizi giriniz."
+    },
+    "phone_email": {
+        "key": "phone_email",
+        "code": 1005,
+        "message": "Bu eposta adresi kullanılıyor."
+    },
+    "invalid_verification_code": {
+        "key": "invalid_verification_code",
+        "code": 1006,
+        "message": "Geçersiz bir kod gönderdiniz. Lütfen tekrar deneyin."
+    },
+    "expired_verification_code": {
+        "key": "invalid_verification_code",
+        "code": 1007,
+        "message": "Doğrulama kodunuzun süresi dolmuş. Lütfen tekrar deneyin"
+    },
+    "expired_password_change": {
+        "key": "expired_password_change",
+        "code": 1008,
+        "message": "Şifre sıfırlama süreniz dolmuş. Lütfen tekrar deneyin."
+    },
+    "not_password_match": {
+        "key": "expired_password_change",
+        "code": 1009,
+        "message": "Şifreler eşleşmiyor. Lütfen şifrelerinizi kontrol edin."
+    },
+    "password_match_old_password": {
+        "key": "password_match_old_password",
+        "code": 1010,
+        "message": "Yeni şifreniz eski şifreniz ile aynı olamaz."
+    },
+    "not_expired_verification_code": {
+        "key": "not_expired_verification_code",
+        "code": 1011,
+        "message": "Henüz doğrulama kodunuzun süresi dolmamış."
+    },
+    "not_found": {
+        "key": "not_found",
+        "code": 1998,
+        "message": "Böyle bir içerik bulunamadı."
+    },
+    "unknown_error": {
+        "key": "unknown_error",
+        "code": 1999,
+        "message": "Bir hata meydana geldi. Lütfen tekrar deneyin"
+    }
+}

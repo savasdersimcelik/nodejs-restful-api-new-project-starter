@@ -12,6 +12,7 @@ const scheme = joi.object({
     email: joi.string().email().label('Email'),                                         // Kullanıcı eposta adresi
     phone: joi.string().label('Telefon'),                                               // Kullanıcı Telefon Numarası
     password: joi.string().min(6).max(20).required().label('Şifre'),                    // Kullanıcı Şifre
+    lang: joi.string().empty("").label('Dil').default(config.defaultLang)               // İçerik dili belirler
 }).options({ stripUnknown: true }).xor('email', 'phone').error(joi_error_message);      // Joi Ayarlar
 
 const route = async (req, res) => {
@@ -20,17 +21,17 @@ const route = async (req, res) => {
     var _user = null;
     if (body?.phone) {
         /** Gönderilen kullanıcı bilgileri ile ilgili veritabanında sorgu yapar */
-        _user = await user.findOne({ phone: body.phone, is_delete: false}).select("+password");;
+        _user = await user.findOne({ phone: body.phone, is_delete: false }).select("+password");
     }
 
     if (!_user && body?.email) {
         /** Gönderilen kullanıcı bilgileri ile ilgili veritabanında sorgu yapar */
-        _user = await user.findOne({ email: body.email, is_delete: false}).select("+password");;
+        _user = await user.findOne({ email: body.email, is_delete: false }).select("+password");
     }
 
     if (!_user) {
         /**  Kullanıcı yoksa hata mesaj döner */
-        return res.error(400, "Böyle bir kullanıcı bulunamadı. Lütfen bilgilerinizi kontrol edin.");
+        return res.error("not_found_user");
     }
 
     /** Sadece doğrulama işlemini tamamlamış kişiler mi giriş yapabilir kontrol ediyor. */
@@ -74,7 +75,7 @@ const route = async (req, res) => {
                 });
 
                 /** Kullanıcı hesabı doğrulanmamış ise hata mesajı üretir */
-                return res.error(400, { key: _user.verification.key, general_error: "Telefon numaranızı doğrulamanız gerekmektedir. Doğrulama kodu gönderildi." });
+                return res.error('not_verification_phone', null, { key: _user.verification.key });
             }
 
             /** Email doğrulama işlemi gerekiyor muydu ve Gerekiyorsa kullanıcı doğrulamış mı ? */
@@ -91,7 +92,7 @@ const route = async (req, res) => {
                 });
 
                 /** Kullanıcı hesabı doğrulanmamış ise hata mesajı üretir */
-                return res.error(400, { key: _user.verification.key, general_error: "Eposta adresinizi doğrulamanız gerekmektedir. Doğrulama kodu gönderildi." });
+                return res.error('not_verification_email', null, { key: _user.verification.key });
             }
 
         }
@@ -102,13 +103,16 @@ const route = async (req, res) => {
     if (!match) {
 
         /** Şifreler aynı değilse hata mesajı döner */
-        return res.error(400, "Lütfen giriş bilgilerinizi kontrol edin.");
+        return res.error("failed_login_information");
     }
 
     const bearer = await encode_token(_user._id, _user.type); // Bearer token üretiliyor
 
     /** Kullanıcı bilgilerinden password çıkartılıp response dönüyor. */
-    return res.respond({ user: _.omit(_user.toObject(), ['password', 'verification.phone_code', 'verification.email_code', 'verification.phone_expiration', 'verification.email_expiration']), bearer });
+    return res.respond({
+        user: _.omit(_user.toObject(), ['password', 'verification.phone_code', 'verification.email_code', 'verification.phone_expiration', 'verification.email_expiration']),
+        bearer: bearer
+    }, 'login');
 }
 
 module.exports = {

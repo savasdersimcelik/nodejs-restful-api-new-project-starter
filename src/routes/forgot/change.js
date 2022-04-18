@@ -20,21 +20,21 @@ const route = async (req, res) => {
     if (!decrypt_key.type && (decrypt_key.type == 'email' || decrypt_key.type == 'phone')) {
 
         /** Gelen key içerisinde type var mı kontrol eder. Yoksa Hata mesajı döner */
-        return res.error(500, "Bilinmeyen bir hata meydana geldi. Lütfen tekrar deneyin.");
+        return res.error("unknown_error");
     }
 
     /**  KEY içerisindeki datalar kontrol ediliyor. */
     if (!decrypt_key._id && !decrypt_key.expiration) {
 
         /** Geçersiz veya Manipüle edilmiş bir KEY gönderilmiş ise hata mesajı döner  */
-        return res.error(400, "Bilinmeyen bir hata meydana geldi. Lütfen tekrar deneyin")
+        return res.error("unknown_error");
     }
 
     /**  Şifre sıfırlama işlemi için süre kontrol ediyor */
     if (decrypt_key.expiration < unix_time) {
 
         /** Eğer süre ( 5 DK ) dolmuş ise hata mesajı üretir  */
-        return res.error(400, "Şifre sıfırlama süreniz dolmuş. Lütfen tekrar deneyin.")
+        return res.error("expired_password_change")
     }
 
     /** Gönderilen KEY ile ilgili veritabanında ki kullanıcı sorgular */
@@ -42,14 +42,14 @@ const route = async (req, res) => {
     if (!_user) {
 
         /** Eğer veritabanında kullanıcı yoksa hata mesajı dönerir. */
-        return res.error(400, "Bilinmeyen bir hata meydana geldi. Lütfen tekrar deneyin");
+        return res.error("unknown_error");
     }
 
     /**  Şifreler eşleşiyor mu kontrol ediyor. */
     if (body.password != body.password_again) {
 
         /** Eğer şifreler eşlemiyorsa hata mesajı döner. */
-        res.error(400, "Şifreler eşleşmiyor lütfen şifrelerinizi kontrol edin.")
+        res.error("not_password_match")
     }
 
     /** Yeni şifre eski şifre ile aynı olabilir mi ? */
@@ -60,7 +60,7 @@ const route = async (req, res) => {
         if (match) {
 
             /** Eğer yeni şifre eski şifre ile aynı ise hata mesajı döner */
-            return res.error(400, "Yeni şifreniz eski şifreniz ile aynı olamaz.")
+            return res.error("password_match_old_password")
         }
     }
 
@@ -82,11 +82,11 @@ const route = async (req, res) => {
     if (_save) {
 
         /** Kayıt işlemi kontrol ediliyor eğer başarılı ise response dönüyor. */
-        return res.respond({}, "Şifreniz başarılı bir şekilde değiştirildi. Artık giriş yapabilirsiniz.");
+        return res.respond({}, "password_change");
     }
 
     /** Kayıt işlemi gerçekleşmezse hata mesajı döner. */
-    return res.error(500, "Bir hata meydana geldi. Lütfen tekrar deneyin");
+    return res.error("unknown_error");
 }
 
 module.exports = {

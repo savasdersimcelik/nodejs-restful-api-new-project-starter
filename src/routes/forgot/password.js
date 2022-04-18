@@ -28,7 +28,7 @@ const route = async (req, res) => {
 
     if (!_user) {
         /**  Kullanıcı yoksa hata mesaj döner */
-        return res.error(400, "Böyle bir kullanıcı bulunamadı. Lütfen bilgilerinizi kontrol edin.");
+        return res.error("not_found_user");
     }
 
     /** Dataları JSON formatına dönüştürür */
@@ -72,12 +72,12 @@ const route = async (req, res) => {
         if (code_send) {
 
             /** Doğrulama kodu değiştirilirse başarılı response döner */
-            return res.respond({ key: _user.verification.key }, "Doğrulama kodu gönderildi.");
+            return res.respond({ key: _user.verification.key }, "verification_code_send");
         }
     }
 
     /** Kayıt işlemi gerçekleşmezse hata mesajı döner. */
-    return res.error(500, "Bir hata meydana geldi. Lütfen tekrar deneyin");
+    return res.error("unknown_error");
 }
 
 module.exports = {

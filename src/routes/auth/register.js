@@ -19,42 +19,42 @@ const scheme = joi.object({
 const route = async (req, res) => {
     let { body, params, query } = req;
     if (config.required.phone) {
-        if(!body?.phone){
-            return res.error(400, "Lütfen telefon numarası giriniz.");
+        if (!body?.phone) {
+            return res.error("require_phone");
         }
 
         /** Gelen telefon numarası veritabanında kontrol ediliyor. */
         const phone_control = await user.findOne({ phone: body.phone, is_delete: false });
         if (phone_control) {
-            return res.error(400, "Bu telefon numarası kullanılıyor.");
+            return res.error("phone_used");
         }
     }
 
     if (config.required.email) {
-        if(!body?.email){
-            return res.error(400, "Lütfen eposta adresinizi giriniz.");
+        if (!body?.email) {
+            return res.error("require_email");
         }
 
         /** Gelen eposta adresi veritabanında kontrol ediliyor. */
         const email_control = await user.findOne({ email: body.email, is_delete: false });
         if (email_control) {
-            return res.error(400, "Bu eposta adresi kullanılıyor.");
+            return res.error("phone_email");
         }
     }
 
     body.password = await hash_password(body.password);                                         // Kullanıcı şifresi hashleniyor.
     body.name = body.first_name + ' ' + body.last_name;                                         // Kullanıcı adı ve soyadı birleştiriliyor.
-    body.is_active = config.verification.phone || config.verification.email ? false : true,     // Herhangi bir doğrulama sistemi aktif ise hesap aktif false olur
-        body.verification = {
-            phone_verifyed: config.verification.phone ? false : true,                           // Eğer doğrulama sistemini kontrol eder.
-            email_verifyed_date: config.verification.phone ? null : await date.toISOString(),   // Doğrulama sistemi false ise tarih oluşturur
-            phone_code: await generate_random_code(6, true),                                    // 6 Haneli bir şifre oluşturuluyor.
-            phone_expiration: await date.getTimeAdd(config.verification.expiration_time),       // Doğrulama kodunun geçerlilik süresi oluşturuluyor.
-            email_verifyed: config.verification.email ? false : true,                           // Eğer doğrulama sistemini kontrol eder.
-            email_verifyed_date: config.verification.email ? null : await date.toISOString(),   // Doğrulama sistemi false ise tarih oluşturur
-            email_code: await generate_random_code(6, true),                                    // 6 Haneli bir şifre oluşturuluyor.
-            email_expiration: await date.getTimeAdd(config.verification.expiration_time),       // Doğrulama kodunun geçerlilik süresi oluşturuluyor.
-        }
+    body.is_active = config.verification.phone || config.verification.email ? false : true;     // Herhangi bir doğrulama sistemi aktif ise hesap aktif false olur
+    body.verification = {
+        phone_verifyed: config.verification.phone ? false : true,                           // Eğer doğrulama sistemini kontrol eder.
+        email_verifyed_date: config.verification.phone ? null : await date.toISOString(),   // Doğrulama sistemi false ise tarih oluşturur
+        phone_code: await generate_random_code(6, true),                                    // 6 Haneli bir şifre oluşturuluyor.
+        phone_expiration: await date.getTimeAdd(config.verification.expiration_time),       // Doğrulama kodunun geçerlilik süresi oluşturuluyor.
+        email_verifyed: config.verification.email ? false : true,                           // Eğer doğrulama sistemini kontrol eder.
+        email_verifyed_date: config.verification.email ? null : await date.toISOString(),   // Doğrulama sistemi false ise tarih oluşturur
+        email_code: await generate_random_code(6, true),                                    // 6 Haneli bir şifre oluşturuluyor.
+        email_expiration: await date.getTimeAdd(config.verification.expiration_time),       // Doğrulama kodunun geçerlilik süresi oluşturuluyor.
+    }
 
     let _user = new user();                                   // Kullanıcı şeması tanımlanıyor.
     _user.set(body);                                            // Kullanıcı dataları set ediliyor.
@@ -105,17 +105,17 @@ const route = async (req, res) => {
 
             if (_save) {
                 /** Kayıt işlemi kontrol ediliyor eğer başarılı ise response dönüyor. */
-                return res.respond({ key: _save.verification.key }, "Kayıt işlemi başarılı bir şekilde gerçekleşti. Artık hesabınızı doğrulayabilirsiniz.");
+                return res.respond({ key: _save.verification.key }, "register_verification");
             }
 
         }
 
         /** Kayıt işlemi kontrol ediliyor eğer başarılı ise response dönüyor. */
-        return res.respond({}, "Kayıt işlemi başarılı bir şekilde gerçekleşti. Artık giriş yapabilirsiniz.");
+        return res.respond({}, "register");
     }
 
     /** Kayıt işlemi gerçekleşmezse hata mesajı döner. */
-    return res.error(500, "Bir hata meydana geldi. Lütfen tekrar deneyin");
+    return res.error("unknown_error");
 }
 
 

@@ -18,22 +18,22 @@ const route = async (req, res) => {
     
     var decrypt_key = null;
     try {
-        const bytes = CryptoJS.AES.decrypt(body.key, config.secretKey);         // Kullanıcıdan gelen KEY çözümlüyor.
-        decrypt_key = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));      // Çöüzmlenen değer UTF-8 olarak string hale getiriliyor
+        const bytes = CryptoJS.AES.decrypt(body.key, config.secretKey);     // Kullanıcıdan gelen KEY çözümlüyor.
+        decrypt_key = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));        // Çöüzmlenen değer UTF-8 olarak string hale getiriliyor
     } catch (error) {
-        return res.error(500, "Bilinmeyen bir hata meydana geldi.");
+        return res.error("unknown_error");
     }
 
     if (!decrypt_key._id) {
 
         /** Gelen key içerisinde _id var mı kontrol eder. Yoksa Hata mesajı döner */
-        return res.error(500, "Bilinmeyen bir hata meydana geldi.");
+        return res.error("unknown_error");s
     }
     
     if (decrypt_key.type && decrypt_key.type != 'forgot') {
 
         /** Gelen key içerisinde type var mı kontrol eder. Yoksa Hata mesajı döner */
-        return res.error(500, "Bilinmeyen bir hata meydana geldi. Lütfen tekrar deneyin.");
+        return res.error("unknown_error");
     }
 
     /** Veritabanında key, _id ve doğrulama kodu eşleşen kişi var mı kontor ediliyor. */
@@ -42,14 +42,14 @@ const route = async (req, res) => {
     if (!_user) {
 
         /** Kullanıcı yoksa hata mesaj döner */
-        return res.error(422, "Geçersiz bir kod gönderdiniz. Lütfen tekrar deneyin.");
+        return res.error("invalid_verification_code");
     }
 
     /** type Eposta adresi ise ve doğrulama kodunun son kullanım tarihi geçmiş mi diye kontrol eder */
     if (_user.verification.forgot_expiration < unix_time) {
 
         /** Doğrulama kodunun süresi dolmuş ise hata mesajı döner */
-        return res.error(422, "Doğrulama kodunuzun süresi dolmuş. Lütfen tekrar deneyin");
+        return res.error("expired_verification_code");
     }
 
     /** 
@@ -71,11 +71,11 @@ const route = async (req, res) => {
     if (_user) {
         
         /** Doğrulama kodu değiştirilirse başarılı response döner */
-        return res.respond({ key: _user.verification.key }, "Artık şifrenizi değiştirebilirsiniz.");
+        return res.respond({ key: _user.verification.key }, "now_change_password");
     }
 
     /** Kayıt işlemi gerçekleşmezse hata mesajı döner. */
-    return res.error(500, "Bir hata meydana geldi. Lütfen tekrar deneyin");
+    return res.error("unknown_error");
 }
 
 module.exports = {

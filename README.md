@@ -36,6 +36,18 @@ Yeni bir NodeJS RESTful API projesi oluşturmak için geliştirilmiştir.
 - [ ] Kullanıcıya Google Firebase FCM üzerinden bildirim gönderme.
 - [ ] Kullanıcıya Özel SMS göndermebilme.
 - [ ] Kullanıcı profil bilgilerini düzenleme.
+- [x] Ülkeler
+    - [x] Yeni Ülke ekleme
+    - [x] Ülkeleri listeleme
+    - [x] Ülke detaylarını getirme
+- [x] Şehirler
+    - [x] Yeni Şehir ekleme
+    - [x] Şehirleri listeleme
+    - [x] Şehir detaylarını getirme
+- [x] İlçeler
+    - [x] Yeni İlçe ekleme
+    - [x] İlçeleri listeleme
+    - [x] İlçe detaylarını getirme
 
 # Ayarlar
 
@@ -50,6 +62,15 @@ initialAdminAccount: {
     "phone": "+905001234567",
     "password": "7BJXH6HjE8",
 }
+```
+
+### User Kayıt Zorunlu Alanlar
+src -> util -> config.js Dosyası içerisinde bilgileri ( Aşağıda yer alan bilgiler ) kendinize göre değiştirin.
+```json
+    required: {
+        "phone": true,
+        "email": false
+    },
 ```
 
 ### Doğrulama Sistemleri
@@ -95,6 +116,9 @@ nodemailer: {
     "logo": "uploads/mail_logo.png"
 }
 ```
+
+# Routerlar
+
 
 # Kütüphaneler
 - [@hapi/joi](https://www.npmjs.com/package/@hapi/joi)

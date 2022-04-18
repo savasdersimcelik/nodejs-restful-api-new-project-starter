@@ -2,6 +2,9 @@ const mongoose = require('mongoose');
 const { config, Debug } = require('../util/index');
 const functions = require('./functions');
 const user = require('./user');
+const countries = require('./countries');
+const cities = require('./cities');
+const districts = require('./districts');
 const sent_sms = require('./sent_sms');
 
 mongoose.connect(config.mongoConnectionString, {
@@ -16,5 +19,8 @@ module.exports = {
     mongoose,
     functions,
     user,
+    countries,
+    cities,
+    districts,
     sent_sms
 }
