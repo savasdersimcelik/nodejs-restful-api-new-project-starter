@@ -8,12 +8,13 @@ const CryptoJS = require("crypto-js");
  * Yeni kayıt olacak kullanıcılar için post ile gönderilecek data şeması
  */
 const scheme = joi.object({
-    first_name: joi.string().empty("").label('İsim').default("İsim"),                          // Kullanıcı adı
-    last_name: joi.string().empty("").label('Soyisim').default("Soyisim"),                     // Kullanıcı soyadı
-    email: joi.string().empty("").email().label('Eposta Adresi'),                                 // Kullanıcı eposta adresi
-    phone: joi.string().empty("").length(11).label('Telefon Numarası'),                           // Kullanıcı telefon numarası
+    first_name: joi.string().empty("").label('İsim').default("İsim"),                           // Kullanıcı adı
+    last_name: joi.string().empty("").label('Soyisim').default("Soyisim"),                      // Kullanıcı soyadı
+    email: joi.string().empty("").email().label('Eposta Adresi'),                               // Kullanıcı eposta adresi
+    phone: joi.string().empty("").length(11).label('Telefon Numarası'),                         // Kullanıcı telefon numarası
     password: joi.string().min(6).max(25).required().label('Şifre'),                            // Kullanıcı Şifresi
-    type: joi.string().empty("").label('Üyelik Türü').default("user")                             // Kullanıcı Üyelik Türü
+    type: joi.string().empty("").label('Üyelik Türü').default("user"),                          // Kullanıcı Üyelik Türü
+    location: joi.object().empty("").label('Konum Bilgileri'),                                  // Konum Bilgileri
 }).options({ stripUnknown: true }).error(joi_error_message);                                    // Joi Ayarlar
 
 const route = async (req, res) => {

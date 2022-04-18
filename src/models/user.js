@@ -27,6 +27,11 @@ const user_schema = new Schema({
         privacy_accepted: { type: Schema.Types.Date, default: Date.now },
         cookies_accepted: { type: Schema.Types.Date, default: Date.now }
     },
+    location: {
+        type: { type: Schema.Types.String, enum: ['Point'], default: 'Point' },
+        origin: { type: Schema.Types.String, default: "" },
+        coordinates: { type: [Number], default: [0.0000, 0.0000], required: false }
+    },
     type: { type: Schema.Types.String, enum: ["admin", "user"], default: "user" },
     fcm_token: { type: Schema.Types.String, default: "", select: false },
     is_active: { type: Schema.Types.Boolean, default: false },

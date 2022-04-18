@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"first_name\": \"Ahmet\",\r\n    \"last_name\": \"Çilingir\",\r\n    \"phone\": \"05301577729\",\r\n    \"password\": \"123456\",\r\n    \"type\": \"partner\"\r\n}",
+							"raw": "{\r\n    \"first_name\": \"Savaş\",\r\n    \"last_name\": \"Çelik\",\r\n    \"phone\": \"05301577729\",\r\n    \"password\": \"123456\",\r\n    \"type\": \"user\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -325,7 +325,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/city/info?_id=625dce47f5f92112f0e635f7",
+							"raw": "{{BASE_URL}}/city/info?_id=625dce47f5f92112f0e635f2",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -336,7 +336,7 @@
 							"query": [
 								{
 									"key": "_id",
-									"value": "625dce47f5f92112f0e635f7"
+									"value": "625dce47f5f92112f0e635f2"
 								}
 							]
 						}
