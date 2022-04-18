@@ -90,8 +90,9 @@ exports.send = async (param) => {
                 message: await message_content(param)
             }
         });
-        const split = response.data.split(' ');
-        if (split[1]) {
+        
+        try {
+            const split = response.data.split(' ');
             let _sent_sms = new sent_sms();
             _sent_sms.set({
                 user: param.user,
@@ -102,8 +103,9 @@ exports.send = async (param) => {
             });
             _sent_sms = await _sent_sms.save();
             return split[1];
+        } catch (error) {
+            return false;
         }
-        return false;
 
     } catch (error) {
         console.error(error);
