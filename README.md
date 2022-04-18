@@ -70,6 +70,12 @@ initialAdminAccount: {
 ### User Kayıt Zorunlu Alanlar
 src -> util -> config.js Dosyası içerisinde bilgileri ( Aşağıda yer alan bilgiler ) kendinize göre değiştirin.
 ```json
+     defaultLang: "tr",
+```
+
+### User Kayıt Zorunlu Alanlar
+src -> util -> config.js Dosyası içerisinde bilgileri ( Aşağıda yer alan bilgiler ) kendinize göre değiştirin.
+```json
     required: {
         "phone": true,
         "email": false
