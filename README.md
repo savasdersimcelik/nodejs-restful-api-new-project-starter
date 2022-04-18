@@ -36,6 +36,9 @@ Yeni bir NodeJS RESTful API projesi oluşturmak için geliştirilmiştir.
 - [ ] Kullanıcıya Google Firebase FCM üzerinden bildirim gönderme.
 - [ ] Kullanıcıya Özel SMS göndermebilme.
 - [ ] Kullanıcı profil bilgilerini düzenleme.
+- [x] Çoklu Dil Sistemi
+    - [x] Başarılı response mesajları dil sisteminden getirilebiliyor
+    - [x] Hata response mesajları dil sisteminden getirilebiliyor
 - [x] Ülkeler
     - [x] Yeni Ülke ekleme
     - [x] Ülkeleri listeleme
