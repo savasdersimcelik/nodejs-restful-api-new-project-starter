@@ -19,7 +19,7 @@
     "crypto-js": "^4.0.0",
     "express": "^4.17.1",
     "joi-objectid": "^3.0.1",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "lodash": "^4.17.15",
     "mongoose": "^5.9.1",
     "nodemailer": "^6.4.6"
